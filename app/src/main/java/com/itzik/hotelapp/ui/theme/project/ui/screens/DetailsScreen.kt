@@ -79,7 +79,7 @@ fun DetailsScreen(
                                 modifier = Modifier
                                     .size(28.dp)
                                     .clickable {
-                                        var a = 0
+                                      
                                     }
                             )
 
