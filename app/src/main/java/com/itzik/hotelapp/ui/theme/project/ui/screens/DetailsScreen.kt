@@ -79,7 +79,7 @@ fun DetailsScreen(
                                 modifier = Modifier
                                     .size(28.dp)
                                     .clickable {
-                                      
+
                                     }
                             )
 
@@ -134,7 +134,7 @@ fun DetailsScreen(
 //                                    }
 //                                }
 //                            }
-//                        }
+//                        }8
                     }
                 }
             }
