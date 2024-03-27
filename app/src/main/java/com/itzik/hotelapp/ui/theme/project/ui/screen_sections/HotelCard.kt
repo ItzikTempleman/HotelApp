@@ -207,7 +207,7 @@ fun HotelCard(
                         .padding(8.dp),
                     colors = ButtonDefaults.buttonColors(colorResource(id = R.color.dark_blue)),
                     onClick = {
-                        //TODO i want
+                        //TODO
                     }
                 ) {
                     Text(
