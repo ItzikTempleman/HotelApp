@@ -6,7 +6,6 @@ import androidx.annotation.RequiresApi
 import com.itzik.hotelapp.ui.theme.project.main.BaseApp
 import com.itzik.hotelapp.ui.theme.project.model.properties.EntityTypeAndName
 import com.itzik.hotelapp.ui.theme.project.model.properties.Hotel
-
 import com.itzik.hotelapp.ui.theme.project.model.properties.InfoData
 import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
 import com.itzik.hotelapp.ui.theme.project.model.properties.Rating
@@ -45,7 +44,5 @@ fun getLocationName(lat: Double, long: Double): Pair<String,String> {
     }
     return Pair(countryName,cityName)
 }
-
-
 
 

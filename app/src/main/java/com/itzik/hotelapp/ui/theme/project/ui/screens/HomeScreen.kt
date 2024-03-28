@@ -20,12 +20,11 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.twotone.Home
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalDrawerSheet
@@ -45,10 +44,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.itzik.hotelapp.R
@@ -173,9 +170,9 @@ fun HomeScreen(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                 ) {
-                                    val (icon, text) = createRefs()
+                                    val (icon) = createRefs()
                                     Icon(
-                                        imageVector = Icons.Outlined.Home,
+                                        imageVector = Icons.TwoTone.Home,
                                         contentDescription = null,
                                         modifier = Modifier
                                             .constrainAs(icon) {
@@ -184,17 +181,6 @@ fun HomeScreen(
                                                 end.linkTo(parent.end)
                                             }
                                             .size(28.dp)
-                                    )
-                                    Text(
-                                        text = stringResource(id = R.string.book_your_vacation),
-                                        modifier = Modifier
-                                            .constrainAs(text) {
-                                                top.linkTo(parent.top)
-                                                bottom.linkTo(parent.bottom)
-                                                end.linkTo(icon.start)
-                                            }
-                                            .padding(start = 6.dp, top = 5.dp),
-                                        fontSize = 20.sp
                                     )
                                 }
                             }

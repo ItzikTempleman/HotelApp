@@ -1,6 +1,7 @@
 package com.itzik.hotelapp.ui.theme.project.ui.screen_sections
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -12,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -55,7 +55,11 @@ fun BottomBar(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(if (isRowBackgroundGray) colorResource(id = R.color.transparent) else colorResource(id = R.color.transparent))
+            .background(
+                if (isRowBackgroundGray) colorResource(id = R.color.transparent) else colorResource(
+                    id = R.color.transparent
+                )
+            )
     ) {
 
         val screens = listOf(
@@ -67,20 +71,18 @@ fun BottomBar(
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
 
+
         Row(
             modifier = Modifier
                 .height(50.dp)
                 .fillMaxWidth()
-                .padding(4.dp)
-                .clip(
-                    RoundedCornerShape(10.dp)
-                )
                 .border(
-                    0.7.dp,
-                    colorResource(id = R.color.black),
-                    shape = RoundedCornerShape(10.dp),
+                    border = BorderStroke(
+                        width = 0.3.dp,
+                        color = Color.Black
+                    ),
                 )
-                .background(colorResource(id = R.color.white)),
+                .background(Color.White),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -105,18 +107,12 @@ fun RowScope.AddItem(
         it.route == screen.route
     } == true
 
-    val contentColor= if(selected) Color.Black else Color.DarkGray
-//    val contentColor = when (screen.title) {
-//        "Home" -> if(selected) colorResource(id = R.color.black) else colorResource(id = R.color.dark_gray)
-//        "Liked" -> if(selected)  colorResource(id = R.color.black) else colorResource(id = R.color.dark_gray)
-//        "Settings" -> if(selected) colorResource(id = R.color.black) else colorResource(id = R.color.dark_gray)
-//        else -> if(selected) colorResource(id = R.color.black) else colorResource(id = R.color.dark_gray)
-//    }
+    val contentColor= if(selected) colorResource(id = R.color.dark_blue) else Color.Gray
 
     Box(
         modifier = Modifier
             .clip(CircleShape)
-            .background(colorResource(id = R.color.white))
+            .background(Color.White)
             .clickable {
                 navController.navigate(screen.route) {
                     popUpTo(navController.graph.findStartDestination().id)

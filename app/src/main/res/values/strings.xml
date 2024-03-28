@@ -11,14 +11,14 @@
     <string name="create_email" translatable="false">Create email (user name)</string>
     <string name="create_password" translatable="false">Create password</string>
     <string name="create_user" translatable="false">Create user\n</string>
-    <string name="user_info" translatable="false">User info\n</string>
+    <string name="user_info" translatable="false">Profile</string>
     <string name="full_name" translatable="false">Name</string>
     <string name="user_email" translatable="false">Email</string>
-    <string name="user_id" translatable="false">ID</string>
+    <string name="user_id" translatable="false">id</string>
     <string name="search" translatable="false">Search</string>
     <string name="find_properties" translatable="false">Find properties</string>
     <string name="home" translatable="false">Home\n</string>
-    <string name="log_out" translatable="false">Sign out</string>
+    <string name="log_out" translatable="false">Log out</string>
     <string name="check_in_date" translatable="false">Check In\n</string>
     <string name="check_out_date" translatable="false">Check Out\n</string>
     <string name="book" translatable="false">Book</string>
@@ -27,8 +27,8 @@
     <string name="check_out_error" translatable="false">Must be later</string>
     <string name="limit_results" translatable="false">Limit</string>
     <string name="sort_by" translatable="false">Sort by</string>
-    <string name="liked_hotels" translatable="false">Liked hotels\n</string>
+    <string name="liked_hotels" translatable="false">Liked</string>
     <string name="book_your_vacation" translatable="false">Book your vacation</string>
-    <string name="settings">Settings\n</string>
+    <string name="settings" translatable="false">Settings\n</string>
 
 </resources>

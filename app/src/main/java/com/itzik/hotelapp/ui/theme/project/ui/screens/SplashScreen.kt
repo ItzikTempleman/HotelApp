@@ -68,10 +68,9 @@ fun SplashScreen(
                 .constrainAs(title) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
-                    end.linkTo(parent.end)
                 }
-                .padding(top = 70.dp),
-            fontSize = 32.sp,
+                .padding(8.dp),
+            fontSize = 26.sp,
         )
 
         CircularProgressIndicator(
