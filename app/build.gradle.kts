@@ -64,16 +64,16 @@ dependencies {
 
     //material
     implementation ("com.google.android.material:material:1.11.0")
-    implementation ("androidx.compose.material:material:1.6.3")
-    implementation ("androidx.compose.material:material-icons-core:1.6.3")
-    implementation ("androidx.compose.material:material-icons-extended:1.6.3")
+    implementation ("androidx.compose.material:material:1.6.4")
+    implementation ("androidx.compose.material:material-icons-core:1.6.4")
+    implementation ("androidx.compose.material:material-icons-extended:1.6.4")
     implementation("androidx.compose.material3:material3")
 
     //navigation
     implementation ("androidx.navigation:navigation-compose:2.7.7")
 
     //coroutines
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     //gson
@@ -93,7 +93,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0")
     implementation ("androidx.lifecycle:lifecycle-common-java8:*version*")
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.3")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.4")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
     //coil
@@ -118,10 +118,10 @@ dependencies {
 
     //compose
     implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
-    implementation ("androidx.compose.ui:ui:1.6.3")
+    implementation ("androidx.compose.ui:ui:1.6.4")
     implementation ("me.onebone:toolbar-compose:2.3.5")
     implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2024.02.02"))
+    implementation(platform("androidx.compose:compose-bom:2024.03.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -134,7 +134,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.02"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
