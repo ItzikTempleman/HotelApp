@@ -1,6 +1,5 @@
 package com.itzik.hotelapp.ui.theme.project.ui.semantics
 
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -20,7 +19,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.itzik.hotelapp.R
 
@@ -50,7 +48,6 @@ fun CustomOutlinedTextField(
     }
 
     OutlinedTextField(
-        shape = RoundedCornerShape(60.dp),
         value = value,
         onValueChange = {
             thisValueChange(it)
@@ -60,7 +57,7 @@ fun CustomOutlinedTextField(
             Text(
                 text = label,
                 fontSize = 18.sp,
-                color = colorResource(id = R.color.light_turquoise),
+                color =Color.DarkGray,
             )
         },
         leadingIcon = {
@@ -92,7 +89,6 @@ fun CustomOutlinedTextField(
                 IconButton(
                     onClick = {
                         if (invokedFunction != null) {
-
                             invokedFunction()
                         }
                     }) {
@@ -100,7 +96,7 @@ fun CustomOutlinedTextField(
                         Icon(
                             imageVector = trailingImage,
                             contentDescription = null,
-                            tint = colorResource(id = R.color.light_turquoise),
+                            tint = colorResource(id = R.color.dark_blue),
                         )
                     }
                 }
@@ -109,10 +105,10 @@ fun CustomOutlinedTextField(
         singleLine = true,
         visualTransformation = visualTransformation,
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = tint,
+            focusedBorderColor =  Color.White,
             textColor = contentColor,
             placeholderColor = contentColor,
-            unfocusedBorderColor = contentColor,
+            unfocusedBorderColor =  Color.White,
             backgroundColor = colorResource(id = R.color.white),
             cursorColor = Color.Black,
         ),

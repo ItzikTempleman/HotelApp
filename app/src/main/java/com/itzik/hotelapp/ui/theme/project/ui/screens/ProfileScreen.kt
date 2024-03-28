@@ -22,6 +22,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PowerSettingsNew
+import androidx.compose.material.icons.outlined.Call
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Person
@@ -81,7 +82,7 @@ fun ProfileScreen(
     ConstraintLayout(
         modifier = modifier.fillMaxSize(),
     ) {
-        val (imageContainer, name, editIcon, uploadImageButton, done, email, signOut) = createRefs()
+        val (imageContainer, name, editIcon, uploadImageButton, done, email,phone, signOut) = createRefs()
 
         Box(
             modifier = Modifier
@@ -208,6 +209,28 @@ fun ProfileScreen(
                 modifier = Modifier.padding(start = 8.dp),
                 color = colorResource(id = R.color.dark_blue),
                 text = user.email
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .constrainAs(phone) {
+                    top.linkTo(email.bottom)
+                }
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Call, contentDescription = null, tint = colorResource(
+                    id = R.color.dark_blue
+                )
+            )
+            Text(
+                modifier = Modifier.padding(start = 8.dp),
+                color = colorResource(id = R.color.dark_blue),
+                text = user.phoneNumber.toString()
             )
         }
 

@@ -44,7 +44,7 @@ fun BottomBarNavHost(
     var userList by remember {
         mutableStateOf(listOf<User>())
     }
-    var user = User(userName = "", email = "", password = "", isItemLiked = false)
+    var user = User(userName = "", email = "", password = "", isItemLiked = false, phoneNumber=0)
 
     LaunchedEffect(key1 = true) {
         coroutineScope.launch {

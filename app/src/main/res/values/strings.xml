@@ -10,6 +10,7 @@
     <string name="create_name" translatable="false">Enter full name</string>
     <string name="create_email" translatable="false">Create email (user name)</string>
     <string name="create_password" translatable="false">Create password</string>
+    <string name="enter_phone_number" translatable="false">Enter Phone Number</string>
     <string name="create_user" translatable="false">Create user\n</string>
     <string name="user_info" translatable="false">Profile</string>
     <string name="full_name" translatable="false">Name</string>

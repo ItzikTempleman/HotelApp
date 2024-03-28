@@ -1,5 +1,6 @@
 package com.itzik.hotelapp.ui.theme.project.data
 
+import android.net.Uri
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -7,7 +8,6 @@ import androidx.room.Query
 import androidx.room.TypeConverters
 import androidx.room.Update
 import com.itzik.hotelapp.ui.theme.project.model.User
-import com.itzik.hotelapp.ui.theme.project.model.properties.Hotel
 import com.itzik.hotelapp.ui.theme.project.utils.Constants.USER_TABLE
 import com.itzik.hotelapp.ui.theme.project.utils.Converters
 
@@ -28,7 +28,25 @@ interface UserDao {
 
     @Update
     suspend fun updateIsLoggedIn(user: User)
-    
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertProfileImage(uri: Uri)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    @Update
 //    suspend fun updateIsLiked(user: User, likedHotel: Hotel)
 //

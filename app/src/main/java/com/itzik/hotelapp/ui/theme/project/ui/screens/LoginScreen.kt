@@ -90,8 +90,8 @@ fun LoginScreen(
             imageVector = Icons.Default.Email,
             isError = isEmailError,
             visualTransformation = VisualTransformation.None,
-            tint = colorResource(id = R.color.light_turquoise),
-            contentColor = colorResource(id = R.color.light_turquoise)
+            tint = colorResource(id = R.color.dark_blue),
+            contentColor = colorResource(id = R.color.dark_blue)
         )
 
         CustomOutlinedTextField(
@@ -117,8 +117,8 @@ fun LoginScreen(
             },
             visualTransformation = if (isPasswordVisible) VisualTransformation.None
             else PasswordVisualTransformation(),
-            tint = colorResource(id = R.color.light_turquoise),
-            contentColor = colorResource(id = R.color.light_turquoise)
+            tint = colorResource(id = R.color.dark_blue),
+            contentColor = colorResource(id = R.color.dark_blue)
         )
 
         CustomButton(
@@ -158,7 +158,7 @@ fun LoginScreen(
             },
             isEnabled = isButtonEnabled,
             fontSize = 22.sp,
-            containerColor = colorResource(id = R.color.light_turquoise),
+            containerColor = colorResource(id = R.color.dark_blue),
             contentColor = colorResource(id = R.color.white),
             roundedShape=60.dp
         )
@@ -177,7 +177,7 @@ fun LoginScreen(
         ) {
             Text(
                 text = stringResource(id = R.string.register),
-                color = colorResource(id = R.color.light_turquoise),
+                color = colorResource(id = R.color.dark_blue),
                 fontSize = 23.sp,
                 fontWeight = FontWeight.Bold
             )

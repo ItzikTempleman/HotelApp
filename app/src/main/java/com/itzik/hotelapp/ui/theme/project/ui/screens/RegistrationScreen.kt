@@ -4,11 +4,16 @@ package com.itzik.hotelapp.ui.theme.project.ui.screens
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.icons.twotone.Phone
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,9 +21,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -43,27 +50,33 @@ fun RegistrationScreen(
     val nameLabelMessage by remember { mutableStateOf(nameText) }
     var name by remember { mutableStateOf("") }
     val nameError by remember { mutableStateOf(false) }
+
     var createEmail by remember { mutableStateOf("") }
     val createEmailText = stringResource(id = R.string.create_email)
     var createEmailLabelMessage by remember { mutableStateOf(createEmailText) }
+
+
     var isNewEmailError by remember { mutableStateOf(false) }
     val createdPasswordText = stringResource(id = R.string.create_password)
     var createPassword by remember { mutableStateOf("") }
     var createPasswordLabelMessage by remember { mutableStateOf(createdPasswordText) }
     var isCreatePasswordError by remember { mutableStateOf(false) }
-    var isCreatedPasswordVisible by remember { mutableStateOf(false) }
 
-    var isButtonEnabled by remember {
-        mutableStateOf(false)
-    }
+    var createPhoneNumber by remember { mutableStateOf("") }
+    val createPhoneNumberText = stringResource(id = R.string.enter_phone_number)
+    var createPhoneNumberLabelMessage by remember { mutableStateOf(createPhoneNumberText) }
+
+    var isCreatedPasswordVisible by remember { mutableStateOf(false) }
+    var isButtonEnabled by remember { mutableStateOf(false) }
 
     fun updateButtonState(name: String, email: String, password: String) {
         isButtonEnabled = name.isNotBlank() && email.isNotBlank() && password.isNotBlank()
     }
+
     ConstraintLayout(
         modifier = Modifier.fillMaxSize(),
     ) {
-        val (title, nameTF, emailTF, passwordTF, signUpBtn) = createRefs()
+        val (title, nameTF, emailTF, passwordTF, phoneNumberTF, signUpBtn) = createRefs()
 
         Text(
             text = stringResource(id = R.string.registration), modifier = Modifier
@@ -92,8 +105,8 @@ fun RegistrationScreen(
                 .padding(8.dp),
             imageVector = Icons.Default.Person,
             isError = nameError, visualTransformation = VisualTransformation.None,
-            tint = colorResource(id = R.color.light_turquoise),
-            contentColor = colorResource(id = R.color.light_turquoise)
+            tint = colorResource(id = R.color.dark_blue),
+            contentColor = colorResource(id = R.color.dark_blue)
         )
 
         CustomOutlinedTextField(
@@ -112,8 +125,8 @@ fun RegistrationScreen(
             imageVector = Icons.Default.Email,
             isError = isNewEmailError,
             visualTransformation = VisualTransformation.None,
-            tint = colorResource(id = R.color.light_turquoise),
-            contentColor = colorResource(id = R.color.light_turquoise)
+            tint = colorResource(id = R.color.dark_blue),
+            contentColor = colorResource(id = R.color.dark_blue)
         )
 
         CustomOutlinedTextField(
@@ -136,13 +149,52 @@ fun RegistrationScreen(
             isPasswordToggleClicked = isCreatedPasswordVisible,
             isPasswordIconShowing = {
                 isCreatedPasswordVisible = !isCreatedPasswordVisible
-
             },
             visualTransformation = if (isCreatedPasswordVisible) VisualTransformation.None
             else PasswordVisualTransformation(),
-            tint = colorResource(id = R.color.light_turquoise),
-            contentColor = colorResource(id = R.color.light_turquoise)
+            tint = colorResource(id = R.color.dark_blue),
+            contentColor = colorResource(id = R.color.dark_blue)
         )
+
+
+        OutlinedTextField(
+            value = createPhoneNumber,
+            onValueChange = {
+                createPhoneNumber = it
+            },
+            label = {
+                Text(
+                    text = createPhoneNumberLabelMessage,
+                    fontSize = 18.sp,
+                    color = Color.DarkGray,
+                )
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                backgroundColor = Color.White,
+                focusedBorderColor =  Color.White,
+                textColor = colorResource(id = R.color.dark_blue),
+                placeholderColor = colorResource(id = R.color.dark_blue),
+                unfocusedBorderColor =  Color.White,
+                cursorColor = Color.Black,
+
+                ),
+            modifier = Modifier
+                .padding(8.dp)
+                .constrainAs(phoneNumberTF) {
+                    top.linkTo(passwordTF.bottom)
+                }
+                .fillMaxWidth(),
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.TwoTone.Phone,
+                    contentDescription = null,
+                    tint = colorResource(id = R.color.dark_blue)
+                )
+            },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
+        )
+
 
         CustomButton(
             text = stringResource(id = R.string.create_user),
@@ -172,18 +224,21 @@ fun RegistrationScreen(
                         createPassword
                     )
                 ) {
-                    val user = userViewModel.createUser(name, createEmail, createPassword)
+                    val user = userViewModel.createUser(
+                        name,
+                        createEmail,
+                        createPassword,
+                        createPhoneNumber.toInt()
+                    )
                     coroutineScope.launch {
                         userViewModel.insertUser(user)
-                        //userViewModel.postUser(user, user.id.toString())
                     }
                     navController.navigate(ScreenContainer.Home.route)
                 }
             },
             isEnabled = isButtonEnabled,
             fontSize = 22.sp,
-
-            containerColor = colorResource(id = R.color.light_turquoise),
+            containerColor = colorResource(id = R.color.dark_blue),
             contentColor = colorResource(id = R.color.white),
             roundedShape = 60.dp
         )

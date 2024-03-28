@@ -2,7 +2,6 @@ package com.itzik.hotelapp.ui.theme.project.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.itzik.hotelapp.ui.theme.project.model.User
-import com.itzik.hotelapp.ui.theme.project.model.properties.Hotel
 import com.itzik.hotelapp.ui.theme.project.repositories.IRepo
 import com.itzik.hotelapp.ui.theme.project.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,13 +14,14 @@ class UserViewModel @Inject constructor(
     private val repo: IRepo
 ) : ViewModel() {
 
-    fun createUser(name: String, email: String, password: String): User =
+    fun createUser(name: String, email: String, password: String, phoneNumber:Int): User =
         User(
             userName = name,
             email = email,
             password = password,
             isLoggedIn = true,
             isItemLiked = false,
+            phoneNumber = phoneNumber
             //savedHotels = mutableListOf()
         )
 

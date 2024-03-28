@@ -54,7 +54,7 @@ object AppModule {
         Room.databaseBuilder(applicationContext, UserDatabase::class.java, USER_DATABASE)
             .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
-            //.addTypeConverter(Converters())
+           // .addTypeConverter(Converters())
             .fallbackToDestructiveMigration().build()
 
 
@@ -75,7 +75,6 @@ object AppModule {
     fun provideUserRetrofitService(): UserService {
         val retrofit =
             Retrofit.Builder().baseUrl(USER_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
                 .client(OkHttpClient.Builder().build()).build()
         return retrofit.create(UserService::class.java)
     }

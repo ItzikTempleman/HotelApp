@@ -18,6 +18,14 @@ class Converters {
     fun toUser(userString: String): User = Gson().fromJson(userString, object : TypeToken<User>() {}.type)
 
 
+//    @TypeConverter
+//    fun fromImageUri(uri: Uri): String = Gson().toJson(uri)
+//
+//    @TypeConverter
+//    fun toImageUri(uriString: String): Uri = Gson().fromJson(uriString, object : TypeToken<Uri>() {}.type)
+
+
+
     @TypeConverter
     fun fromHotelList(hotels: MutableList<Hotel>): String = Gson().toJson(hotels)
 
