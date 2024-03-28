@@ -77,9 +77,7 @@ fun ProfileScreen(
         onResult = { uri ->
             selectedImageUri = uri
             coroutineScope.launch {
-                if (uri != null) {
                     userViewModel.updateProfileImageUri(uri.toString())
-                }
             }
         }
     )
@@ -102,7 +100,7 @@ fun ProfileScreen(
                 .border(1.dp, Color.Gray, CircleShape)
         ) {
             if (selectedImageUri == null) {
-                if(user.profileImage==null) {
+                if(user.profileImage==null||user.profileImage=="" ) {
                     Image(
                         imageVector = Icons.Outlined.Person,
                         contentDescription = null,
@@ -111,10 +109,9 @@ fun ProfileScreen(
                             .fillMaxSize()
                             .clip(CircleShape)
                     )
-                }
-                else {
+                } else {
                     AsyncImage(
-                        model = user.profileImage,
+                        model = Uri.parse(user.profileImage),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier

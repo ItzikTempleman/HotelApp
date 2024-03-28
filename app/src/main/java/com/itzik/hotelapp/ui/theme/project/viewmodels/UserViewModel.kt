@@ -14,14 +14,15 @@ class UserViewModel @Inject constructor(
     private val repo: IRepo
 ) : ViewModel() {
 
-    fun createUser(name: String, email: String, password: String, phoneNumber:Int): User =
+    fun createUser(name: String, email: String, password: String, phoneNumber:Int, profileImage:String): User =
         User(
             userName = name,
             email = email,
             password = password,
             isLoggedIn = true,
             isItemLiked = false,
-            phoneNumber = phoneNumber
+            phoneNumber = phoneNumber,
+            profileImage=profileImage
             //savedHotels = mutableListOf()
         )
 

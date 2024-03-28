@@ -228,7 +228,8 @@ fun RegistrationScreen(
                         name,
                         createEmail,
                         createPassword,
-                        createPhoneNumber.toInt()
+                        createPhoneNumber.toInt(),
+                        profileImage = ""
                     )
                     coroutineScope.launch {
                         userViewModel.insertUser(user)
