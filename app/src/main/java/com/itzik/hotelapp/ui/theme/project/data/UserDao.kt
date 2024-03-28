@@ -1,6 +1,5 @@
 package com.itzik.hotelapp.ui.theme.project.data
 
-import android.net.Uri
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -29,21 +28,13 @@ interface UserDao {
     @Update
     suspend fun updateIsLoggedIn(user: User)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertProfileImage(uri: Uri)
 
 
+    @Query("SELECT profileImage FROM userTable WHERE isLoggedIn=1 LIMIT 1")
+    suspend fun fetchProfileImageUri(): String?
 
-
-
-
-
-
-
-
-
-
-
+    @Update
+    suspend fun updateProfileImageUri(user: User)
 
 
 

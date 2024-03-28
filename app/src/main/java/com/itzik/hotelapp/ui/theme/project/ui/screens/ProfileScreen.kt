@@ -76,8 +76,14 @@ fun ProfileScreen(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { uri ->
             selectedImageUri = uri
+            coroutineScope.launch {
+                if (uri != null) {
+                    userViewModel.updateProfileImageUri(uri.toString())
+                }
+            }
         }
     )
+
 
     ConstraintLayout(
         modifier = modifier.fillMaxSize(),
@@ -96,14 +102,27 @@ fun ProfileScreen(
                 .border(1.dp, Color.Gray, CircleShape)
         ) {
             if (selectedImageUri == null) {
-                Image(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(CircleShape)
-                )
+                if(user.profileImage==null) {
+                    Image(
+                        imageVector = Icons.Outlined.Person,
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(CircleShape)
+                    )
+                }
+                else {
+                    AsyncImage(
+                        model = user.profileImage,
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(CircleShape)
+                    )
+                }
+
             } else {
                 AsyncImage(
                     model = selectedImageUri,

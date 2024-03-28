@@ -47,7 +47,22 @@ class UserViewModel @Inject constructor(
 
     suspend fun updateIsLoggedIn(user: User) = repo.updateIsLoggedIn(user)
 
+
+    suspend fun updateProfileImageUri(uri: String) {
+        val loggedInUser = repo.fetchLoggedInUsers()
+        loggedInUser.first().let {
+            it.profileImage = uri
+            repo.updateProfileImageUri(it)
+        }
+    }
+
+
     suspend fun postUser(user: User, id: String) = repo.postUser(id, user)
+
+
+
+
+
 
 
 //    suspend fun getLikedHotels(user:User) = repo.getLikedList(user)

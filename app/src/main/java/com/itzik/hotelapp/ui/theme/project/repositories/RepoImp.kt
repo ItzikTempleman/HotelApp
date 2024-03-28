@@ -2,7 +2,6 @@ package com.itzik.hotelapp.ui.theme.project.repositories
 
 import com.itzik.hotelapp.ui.theme.project.data.UserDao
 import com.itzik.hotelapp.ui.theme.project.model.User
-import com.itzik.hotelapp.ui.theme.project.model.properties.Hotel
 import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyIdResponse
 import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
 import com.itzik.hotelapp.ui.theme.project.requests.PropertyService
@@ -58,6 +57,10 @@ class RepoImp @Inject constructor(
         limit,
         currency
     )
+
+
+    override suspend fun updateProfileImageUri(user: User) = userDao.updateProfileImageUri(user)
+
 
 //    override suspend fun updateIsLiked(user: User, likedHotel: Hotel) = userDao.updateIsLiked(user, likedHotel)
 //

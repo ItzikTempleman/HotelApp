@@ -16,6 +16,6 @@ data class User(
     val password: String,
     var isLoggedIn: Boolean = false,
     var isItemLiked: Boolean,
-    var phoneNumber:Int,
-    var profileImage: String?=""
+    var phoneNumber: Int,
+    var profileImage: String? = null
 ) : Parcelable

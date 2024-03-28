@@ -1,7 +1,6 @@
 package com.itzik.hotelapp.ui.theme.project.repositories
 
 import com.itzik.hotelapp.ui.theme.project.model.User
-import com.itzik.hotelapp.ui.theme.project.model.properties.Hotel
 import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyIdResponse
 import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
 import retrofit2.Response
@@ -35,6 +34,21 @@ interface IRepo {
 
     ):Response<PropertyInfoResponse>
 
+
+    suspend fun updateProfileImageUri(user: User)
+}
+
+
+
+
+
+
+
+
+
+
+
+
 //
 //    suspend fun updateIsLiked(user: User, likedHotel: Hotel)
 //
@@ -42,4 +56,4 @@ interface IRepo {
 //
 //    suspend fun clearLikedList()
 
-}
+//}

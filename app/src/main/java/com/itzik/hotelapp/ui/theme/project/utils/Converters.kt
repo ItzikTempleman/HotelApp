@@ -19,10 +19,10 @@ class Converters {
 
 
 //    @TypeConverter
-//    fun fromImageUri(uri: Uri): String = Gson().toJson(uri)
+//    fun fromUri(uri: Uri?): String? = uri?.toString()
 //
 //    @TypeConverter
-//    fun toImageUri(uriString: String): Uri = Gson().fromJson(uriString, object : TypeToken<Uri>() {}.type)
+//    fun toUri(uriString: String?): Uri? = uriString?.let { Uri.parse(it) }
 
 
 
