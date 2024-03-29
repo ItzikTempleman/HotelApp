@@ -1,6 +1,7 @@
 package com.itzik.hotelapp.ui.theme.project.ui.screens
 
 import android.net.Uri
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -76,17 +77,20 @@ fun ProfileScreen(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { uri ->
             selectedImageUri = uri
+            Log.d("ProfileScreen", "Selected image URI: $uri")
             coroutineScope.launch {
-                    userViewModel.updateProfileImageUri(uri.toString())
+                userViewModel.updateProfileImageUri(uri.toString())
             }
         }
     )
-
+    Log.d("ProfileScreen", "Profile image URI: ${user.profileImage}")
 
     ConstraintLayout(
         modifier = modifier.fillMaxSize(),
     ) {
-        val (imageContainer, name, editIcon, uploadImageButton, done, email,phone, signOut) = createRefs()
+        val (imageContainer, name, editIcon, uploadImageButton, done, email, phone, signOut) = createRefs()
+
+      //  Log.d("TAG", "Profile image: ${user.profileImage}")
 
         Box(
             modifier = Modifier
@@ -99,38 +103,37 @@ fun ProfileScreen(
                 .clip(CircleShape)
                 .border(1.dp, Color.Gray, CircleShape)
         ) {
-            if (selectedImageUri == null) {
-                if(user.profileImage==null||user.profileImage=="" ) {
-                    Image(
-                        imageVector = Icons.Outlined.Person,
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(CircleShape)
-                    )
-                } else {
-                    AsyncImage(
-                        model = Uri.parse(user.profileImage),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(CircleShape)
-                    )
-                }
-
-            } else {
+            if (selectedImageUri != null) {
+                // Load selected image if available
                 AsyncImage(
-                    model = selectedImageUri,
+                    model = selectedImageUri!!,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(CircleShape)
                 )
+            } else {
+                // Load profile image if available, or default icon if not
+                user.profileImage?.let { profileImage ->
+                    AsyncImage(
+                        model = Uri.parse(profileImage),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(CircleShape)
+                    )
+                } ?: Image(
+                    imageVector = Icons.Outlined.Person,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(CircleShape)
+                )
             }
         }
+
 
         Text(
             text = user.userName,
@@ -185,7 +188,7 @@ fun ProfileScreen(
                 )
             }
         }
-        if(isDoneButtonVisible) {
+        if (isDoneButtonVisible) {
             TextButton(
                 onClick = {
                     isDoneButtonVisible = false

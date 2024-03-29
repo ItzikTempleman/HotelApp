@@ -2,7 +2,6 @@ package com.itzik.hotelapp.ui.theme.project.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -223,10 +222,7 @@ fun HomeScreen(
                                         )
                                     }
                                 }
-                                Log.d(
-                                    "TAG",
-                                    "list item count: ${propertyInfo.infoData.hotels.size}"
-                                )
+
                                 items(propertyInfo.infoData.hotels) { hotelItem ->
                                     countryName = getLocationName(
                                         hotelItem.coordinates.last(),

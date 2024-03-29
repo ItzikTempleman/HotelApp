@@ -29,10 +29,6 @@ interface UserDao {
     suspend fun updateIsLoggedIn(user: User)
 
 
-
-    @Query("SELECT profileImage FROM userTable WHERE isLoggedIn=1 LIMIT 1")
-    suspend fun fetchProfileImageUri(): String?
-
     @Update
     suspend fun updateProfileImageUri(user: User)
 
