@@ -88,6 +88,7 @@ fun ProfileScreen(
     ) {
         val (imageContainer, name, editIcon, uploadImageButton, done, email, phone, signOut) = createRefs()
 
+
         Box(
             modifier = Modifier
                 .constrainAs(imageContainer) {
@@ -99,39 +100,38 @@ fun ProfileScreen(
                 .clip(CircleShape)
                 .border(1.dp, Color.Gray, CircleShape)
         ) {
-            if (selectedImageUri == null) {
-                if (user.profileImage == null || user.profileImage == "") {
-                    Image(
-                        imageVector = Icons.Outlined.Person,
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(CircleShape)
-                    )
-                } else {
-                    AsyncImage(
-                        model = Uri.parse(user.profileImage),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(CircleShape)
-                    )
-                }
-
-            } else {
+            if (selectedImageUri != null) {
+                // Load selected image if available
                 AsyncImage(
-                    model = selectedImageUri,
+                    model = selectedImageUri!!,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(CircleShape)
                 )
+            } else if (!user.profileImage.isNullOrBlank()) {
+                // Load profile image if available
+                val profileImageUri = Uri.parse(user.profileImage)
+                AsyncImage(
+                    model = profileImageUri,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(CircleShape)
+                )
+            } else {
+                // Show default icon if no profile image
+                Image(
+                    imageVector = Icons.Outlined.Person,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(CircleShape)
+                )
             }
         }
-
 
         Text(
             text = user.userName,
