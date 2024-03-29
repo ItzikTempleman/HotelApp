@@ -48,12 +48,14 @@ fun CustomButton(
         ) {
             val (thisText) = createRefs()
             Text(
-                modifier = Modifier.constrainAs(thisText) {
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                }.scale(scaleY = 1f, scaleX = 0.8f),
+                modifier = Modifier
+                    .constrainAs(thisText) {
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    }
+                    .scale(scaleY = 1f, scaleX = 0.8f),
                 text = text,
                 fontSize = fontSize,
             )
@@ -61,3 +63,5 @@ fun CustomButton(
 
     }
 }
+
+

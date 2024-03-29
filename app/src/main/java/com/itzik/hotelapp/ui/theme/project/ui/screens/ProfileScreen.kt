@@ -44,7 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.itzik.hotelapp.R
 import com.itzik.hotelapp.ui.theme.project.model.User
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.ScreenContainer
@@ -69,16 +69,16 @@ fun ProfileScreen(
         mutableStateOf(false)
     }
     var selectedImageUri by remember {
-        mutableStateOf<Uri?>(null)
+        mutableStateOf(Uri.parse(user.profileImage))
     }
 
 
     val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
-        onResult = { uri ->
-            selectedImageUri = uri
+        onResult = {
             coroutineScope.launch {
-                userViewModel.updateProfileImageUri(selectedImageUri.toString())
+                selectedImageUri = it
+                userViewModel.updateProfileImageUri(selectedImageUri)
             }
         }
     )
@@ -87,7 +87,6 @@ fun ProfileScreen(
         modifier = modifier.fillMaxSize(),
     ) {
         val (imageContainer, name, editIcon, uploadImageButton, done, email, phone, signOut) = createRefs()
-
 
         Box(
             modifier = Modifier
@@ -101,20 +100,8 @@ fun ProfileScreen(
                 .border(1.dp, Color.Gray, CircleShape)
         ) {
             if (selectedImageUri != null) {
-                // Load selected image if available
-                AsyncImage(
-                    model = selectedImageUri!!,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(CircleShape)
-                )
-            } else if (!user.profileImage.isNullOrBlank()) {
-                // Load profile image if available
-                val profileImageUri = Uri.parse(user.profileImage)
-                AsyncImage(
-                    model = profileImageUri,
+                Image(
+                    painter = rememberAsyncImagePainter(model = selectedImageUri),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -122,10 +109,10 @@ fun ProfileScreen(
                         .clip(CircleShape)
                 )
             } else {
-                // Show default icon if no profile image
                 Image(
                     imageVector = Icons.Outlined.Person,
                     contentDescription = null,
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(CircleShape)

@@ -1,5 +1,6 @@
 package com.itzik.hotelapp.ui.theme.project.viewmodels
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.itzik.hotelapp.ui.theme.project.model.User
 import com.itzik.hotelapp.ui.theme.project.repositories.IRepo
@@ -49,16 +50,16 @@ class UserViewModel @Inject constructor(
     suspend fun updateIsLoggedIn(user: User) = repo.updateIsLoggedIn(user)
 
 
-    suspend fun updateProfileImageUri(uri: String) {
+    suspend fun updateProfileImageUri(uri: Uri) {
         val loggedInUser = repo.fetchLoggedInUsers()
         loggedInUser.first().let {
-            it.profileImage = uri
+            it.profileImage = uri.toString()
             repo.updateProfileImageUri(it)
         }
     }
 
 
-    suspend fun postUser(user: User, id: String) = repo.postUser(id, user)
+    //suspend fun postUser(user: User, id: String) = repo.postUser(id, user)
 
 
 
