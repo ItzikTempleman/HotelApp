@@ -33,7 +33,6 @@ interface UserDao {
     suspend fun updateProfileImageUri(user: User)
 
 
-
 //    @Update
 //    suspend fun updateIsLiked(user: User, likedHotel: Hotel)
 //

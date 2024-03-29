@@ -62,6 +62,7 @@ class RepoImp @Inject constructor(
     override suspend fun updateProfileImageUri(user: User) = userDao.updateProfileImageUri(user)
 
 
+
 //    override suspend fun updateIsLiked(user: User, likedHotel: Hotel) = userDao.updateIsLiked(user, likedHotel)
 //
 //    override suspend fun getLikedList(user:User): MutableList<Hotel> = userDao.getLikedList(user)
