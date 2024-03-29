@@ -4,12 +4,9 @@ package com.itzik.hotelapp.ui.theme.project.ui.screen_sections
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Text
@@ -25,7 +22,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.colorResource
@@ -121,13 +117,7 @@ fun SearchAndDateSelection(
                     modifier = Modifier
 
                         .padding(start = 8.dp, end = 8.dp, top = 4.dp)
-                        .fillMaxWidth()
-                        .scale(scaleY = 0.8f, scaleX = 1f)
-                        .border(
-                            border = BorderStroke(
-                                1.dp, colorResource(id = R.color.dark_gray)
-                            ), shape = RoundedCornerShape(6.dp)
-                        ),
+                        .fillMaxWidth(),
                     leadingIcon = Icons.Rounded.Search,
                     trailingIcon = expansionIcon,
                     placeholder = if (isSearchFieldEmpty) stringResource(id = R.string.blank_search) else stringResource(
@@ -206,14 +196,12 @@ fun SearchAndDateSelection(
             CustomButton(
                 isEnabled = isButtonEnabled,
                 text = stringResource(id = R.string.find_properties_or_hotels),
-                modifier = Modifier
+                modifier = Modifier.padding(start = 8.dp, end=8.dp, top=16.dp)
                     .constrainAs(searchBtn) {
                         top.linkTo(datePickerSection.bottom)
-                    }
-                    .scale(scaleY = 0.8f, scaleX = 1f),
+                    },
                 onButtonClick = {
                     coroutineScope.launch {
-
                         updateProgressBarState(mutableStateOf(true))
                         propertyViewModel.getPropertyInfo(
                             propertyId,
@@ -232,9 +220,9 @@ fun SearchAndDateSelection(
                     }
                 },
                 fontSize = 20.sp,
-                containerColor = colorResource(id = R.color.light_turquoise),
+                containerColor = colorResource(id = R.color.dark_blue),
                 contentColor = colorResource(id = R.color.white),
-                roundedShape = 20.dp
+                roundedShape = 8.dp
             )
 
 

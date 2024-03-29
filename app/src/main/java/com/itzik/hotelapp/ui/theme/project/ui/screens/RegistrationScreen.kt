@@ -13,6 +13,8 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.icons.twotone.Phone
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -64,7 +66,7 @@ fun RegistrationScreen(
 
     var createPhoneNumber by remember { mutableStateOf("") }
     val createPhoneNumberText = stringResource(id = R.string.enter_phone_number)
-    var createPhoneNumberLabelMessage by remember { mutableStateOf(createPhoneNumberText) }
+    val createPhoneNumberLabelMessage by remember { mutableStateOf(createPhoneNumberText) }
 
     var isCreatedPasswordVisible by remember { mutableStateOf(false) }
     var isButtonEnabled by remember { mutableStateOf(false) }
@@ -105,8 +107,8 @@ fun RegistrationScreen(
                 .padding(8.dp),
             imageVector = Icons.Default.Person,
             isError = nameError, visualTransformation = VisualTransformation.None,
-            tint = colorResource(id = R.color.dark_blue),
-            contentColor = colorResource(id = R.color.dark_blue)
+            tint = Color.Black,
+            contentColor = Color.Black
         )
 
         CustomOutlinedTextField(
@@ -125,8 +127,8 @@ fun RegistrationScreen(
             imageVector = Icons.Default.Email,
             isError = isNewEmailError,
             visualTransformation = VisualTransformation.None,
-            tint = colorResource(id = R.color.dark_blue),
-            contentColor = colorResource(id = R.color.dark_blue)
+            tint = Color.Black,
+            contentColor = Color.Black
         )
 
         CustomOutlinedTextField(
@@ -152,49 +154,57 @@ fun RegistrationScreen(
             },
             visualTransformation = if (isCreatedPasswordVisible) VisualTransformation.None
             else PasswordVisualTransformation(),
-            tint = colorResource(id = R.color.dark_blue),
-            contentColor = colorResource(id = R.color.dark_blue)
+            tint = Color.Black,
+            contentColor = Color.Black
         )
 
-
-        OutlinedTextField(
-            value = createPhoneNumber,
-            onValueChange = {
-                createPhoneNumber = it
-            },
-            label = {
-                Text(
-                    text = createPhoneNumberLabelMessage,
-                    fontSize = 18.sp,
-                    color = Color.DarkGray,
-                )
-            },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                backgroundColor = Color.White,
-                focusedBorderColor =  Color.White,
-                textColor = colorResource(id = R.color.dark_blue),
-                placeholderColor = colorResource(id = R.color.dark_blue),
-                unfocusedBorderColor =  Color.White,
-                cursorColor = Color.Black,
-
-                ),
+        Card(
             modifier = Modifier
                 .padding(8.dp)
                 .constrainAs(phoneNumberTF) {
                     top.linkTo(passwordTF.bottom)
                 }
                 .fillMaxWidth(),
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.TwoTone.Phone,
-                    contentDescription = null,
-                    tint = colorResource(id = R.color.dark_blue)
-                )
-            },
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
-        )
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 6.dp
+            ),
+            colors = CardDefaults.cardColors(
+                containerColor = Color.White
+            ),
+        ) {
+            OutlinedTextField(
+                value = createPhoneNumber,
+                onValueChange = {
+                    createPhoneNumber = it
+                },
+                label = {
+                    Text(
+                        text = createPhoneNumberLabelMessage,
+                        fontSize = 18.sp,
+                        color = Color.DarkGray,
+                    )
+                },
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    backgroundColor = Color.White,
+                    focusedBorderColor = Color.White,
+                    textColor = Color.Black,
+                    placeholderColor = Color.Black,
+                    unfocusedBorderColor = Color.White,
+                    cursorColor = Color.Black,
 
+                    ),
+                modifier = Modifier,
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.TwoTone.Phone,
+                        contentDescription = null,
+                        tint = Color.Black
+                    )
+                },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
+            )
+        }
 
         CustomButton(
             text = stringResource(id = R.string.create_user),
@@ -228,7 +238,7 @@ fun RegistrationScreen(
                         name,
                         createEmail,
                         createPassword,
-                        createPhoneNumber.toInt(),
+                        createPhoneNumber.toLong(),
                         profileImage = ""
                     )
                     coroutineScope.launch {
@@ -238,10 +248,10 @@ fun RegistrationScreen(
                 }
             },
             isEnabled = isButtonEnabled,
-            fontSize = 22.sp,
+            fontSize = 20.sp,
             containerColor = colorResource(id = R.color.dark_blue),
             contentColor = colorResource(id = R.color.white),
-            roundedShape = 60.dp
+            roundedShape = 8.dp
         )
     }
 }

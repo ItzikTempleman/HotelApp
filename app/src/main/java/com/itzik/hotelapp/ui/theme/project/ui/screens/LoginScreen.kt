@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -70,29 +71,29 @@ fun LoginScreen(
                     top.linkTo(parent.top)
                 },
             fontSize = 32.sp,
-            color = colorResource(id = R.color.black),
+            color = Color.Black,
             fontWeight = FontWeight.Bold
         )
 
-        CustomOutlinedTextField(
-            value = email,
-            thisValueChange = {
-                email = it
-                updateButtonState(email, password)
-            },
-            label = emailLabelMessage,
-            modifier = Modifier
-                .constrainAs(emailTF) {
-                    top.linkTo(title.bottom)
-                }
-                .fillMaxWidth()
-                .padding(8.dp),
-            imageVector = Icons.Default.Email,
-            isError = isEmailError,
-            visualTransformation = VisualTransformation.None,
-            tint = colorResource(id = R.color.dark_blue),
-            contentColor = colorResource(id = R.color.dark_blue)
-        )
+            CustomOutlinedTextField(
+                value = email,
+                thisValueChange = {
+                    email = it
+                    updateButtonState(email, password)
+                },
+                label = emailLabelMessage,
+                modifier  = Modifier
+                    .constrainAs(emailTF) {
+                        top.linkTo(title.bottom)
+                    }
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                imageVector = Icons.Default.Email,
+                isError = isEmailError,
+                visualTransformation = VisualTransformation.None,
+                tint = Color.Black,
+                contentColor = Color.Black
+            )
 
         CustomOutlinedTextField(
             value = password,
@@ -117,8 +118,8 @@ fun LoginScreen(
             },
             visualTransformation = if (isPasswordVisible) VisualTransformation.None
             else PasswordVisualTransformation(),
-            tint = colorResource(id = R.color.dark_blue),
-            contentColor = colorResource(id = R.color.dark_blue)
+            tint = Color.Black,
+            contentColor = Color.Black
         )
 
         CustomButton(
@@ -157,10 +158,10 @@ fun LoginScreen(
                 }
             },
             isEnabled = isButtonEnabled,
-            fontSize = 22.sp,
+            fontSize = 20.sp,
             containerColor = colorResource(id = R.color.dark_blue),
-            contentColor = colorResource(id = R.color.white),
-            roundedShape=60.dp
+            contentColor = Color.White,
+            roundedShape = 8.dp
         )
 
         TextButton(

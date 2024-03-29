@@ -233,7 +233,7 @@ fun HomeScreen(
                                         propertyInfo.infoData.hotels.first().coordinates.first()
                                     ).second
                                     HotelCard(
-                                        modifier = Modifier.clickable {
+                                        modifier = Modifier.padding(top=20.dp).clickable {
                                             navController.navigate(ScreenContainer.Details.route)
                                         }, hotelItem, userViewModel, user, coroutineScope
                                     )

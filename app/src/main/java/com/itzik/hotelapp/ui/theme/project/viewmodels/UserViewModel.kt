@@ -1,6 +1,7 @@
 package com.itzik.hotelapp.ui.theme.project.viewmodels
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.itzik.hotelapp.ui.theme.project.model.User
 import com.itzik.hotelapp.ui.theme.project.repositories.IRepo
@@ -15,17 +16,13 @@ class UserViewModel @Inject constructor(
     private val repo: IRepo
 ) : ViewModel() {
 
-    fun createUser(name: String, email: String, password: String, phoneNumber:Int, profileImage:String): User =
-        User(
-            userName = name,
-            email = email,
-            password = password,
-            isLoggedIn = true,
-            isItemLiked = false,
-            phoneNumber = phoneNumber,
-            profileImage=profileImage
-            //savedHotels = mutableListOf()
+    fun createUser(name: String, email: String, password: String, phoneNumber: Long, profileImage: String): User {
+        Log.d("TAG","$phoneNumber")
+        return User(userName = name, email = email, password = password, isLoggedIn = true, isItemLiked = false, phoneNumber = phoneNumber, profileImage = profileImage //savedHotels = mutableListOf()
         )
+    }
+
+
 
     suspend fun insertUser(user: User) = repo.insertUser(user)
 
@@ -62,17 +59,11 @@ class UserViewModel @Inject constructor(
     //suspend fun postUser(user: User, id: String) = repo.postUser(id, user)
 
 
-
-
-
-
-
 //    suspend fun getLikedHotels(user:User) = repo.getLikedList(user)
 //
 //    suspend fun updateIsLiked(user: User, likedHotel: Hotel) = repo.updateIsLiked(user, likedHotel)
 //
 //    suspend fun clearLikedHotelList() = repo.clearLikedList()
-
 
 
     fun isValidEmail(email: String): Boolean =

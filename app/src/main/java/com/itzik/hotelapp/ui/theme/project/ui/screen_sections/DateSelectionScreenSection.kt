@@ -53,7 +53,7 @@ fun DateSelectionScreenSection(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp),
+            .padding(start = 8.dp, end=8.dp, top=16.dp),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         DatePickerDialog(
@@ -65,12 +65,8 @@ fun DateSelectionScreenSection(
             insertedDate = {
                 mutableCheckInDate = it.value
                 updateCheckInDate(mutableCheckInDate)
-
             },
             isCheckInIcon = true,
-
-
-
             updateIsFirstTimeCheckInSelected = {
                 isCheckInFirstTimeClicked=it.value
                 updateIsCheckInFirstTime(it)
@@ -93,9 +89,6 @@ fun DateSelectionScreenSection(
                 updateCheckOutDate(mutableCheckOutDate)
             },
             isCheckInIcon = false,
-
-
-
             updateIsFirstTimeCheckInSelected = {
                 isCheckOutFirstTimeClicked=it.value
                 updateIsCheckOutFirstTime(it)
@@ -142,12 +135,10 @@ fun formattedDate(calendar: Calendar): String {
 
 fun extractAgeFromDate(dateSelected: String): Int {
     val formatter = DateTimeFormatter.ofPattern(pattern)
-
     val thisYear = LocalDate.parse(today, formatter).year
     val selectedYear = LocalDate.parse(dateSelected, formatter).year
     val thisDayOfMonth = LocalDate.parse(today, formatter).dayOfMonth
     val selectedDayOfMonth = LocalDate.parse(dateSelected, formatter).dayOfMonth
-
     var tempAge = thisYear - selectedYear
     if (thisDayOfMonth < selectedDayOfMonth) {
         tempAge--
