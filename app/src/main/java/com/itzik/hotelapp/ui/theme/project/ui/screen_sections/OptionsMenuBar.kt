@@ -64,23 +64,27 @@ fun OptionsMenuBar(
         modifier = modifier
     ) {
         val (sortResultText, sortResultBox, sortResultDropDownMenu, sortResultIcon, limitResultText, limitResultBox, limitResultDropDownMenu, limitResultIcon) = createRefs()
-
+//TODO ADD HERE A COLUMN WITH TWO NESTED ROWS- EACH ROW IS A SORT OR LIMIT FOILED AND THEY ARE ONE ABOVE THE OTHER INSTEAD OF ONE TO THE OTHERS SIDE
         Text(
-            modifier = Modifier.constrainAs(sortResultText){
-                top.linkTo(parent.top)
-                bottom.linkTo(parent.bottom)
-                start.linkTo(parent.start)
-            }.padding(4.dp),
+            modifier = Modifier
+                .constrainAs(sortResultText) {
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                    start.linkTo(parent.start)
+                }
+                .padding(4.dp),
             text = stringResource(id = R.string.sort_by),
             fontFamily = FontFamily.Monospace,
             fontSize = 16.sp,
         )
 
         Column(
-            modifier = Modifier.constrainAs(sortResultBox){
-                top.linkTo(parent.top)
-                start.linkTo(sortResultText.end)
-            }.padding(4.dp),
+            modifier = Modifier
+                .constrainAs(sortResultBox) {
+                    top.linkTo(parent.top)
+                    start.linkTo(sortResultText.end)
+                }
+                .padding(4.dp),
         ) {
             DropdownMenu(
                 modifier = Modifier.width(100.dp),
@@ -105,14 +109,19 @@ fun OptionsMenuBar(
 
 
         Box(
-            modifier = Modifier.constrainAs(sortResultDropDownMenu){
-                top.linkTo(parent.top)
-                bottom.linkTo(parent.bottom)
-                start.linkTo(sortResultBox.end)
-            }.height(30.dp).width(70.dp).border(
+            modifier = Modifier
+                .constrainAs(sortResultDropDownMenu) {
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                    start.linkTo(sortResultBox.end)
+                }
+                .height(30.dp)
+                .width(70.dp)
+                .border(
                     0.7.dp,
                     Color.Black,
-                    shape = RoundedCornerShape(8.dp))
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clip(RoundedCornerShape(8.dp))
                 .background(Color.White)
         ) {
@@ -125,11 +134,13 @@ fun OptionsMenuBar(
         }
 
         IconButton(
-            modifier = Modifier.constrainAs(sortResultIcon){
-                top.linkTo(parent.top)
-                bottom.linkTo(parent.bottom)
-                start.linkTo(sortResultDropDownMenu.end)
-            }.padding(4.dp),
+            modifier = Modifier
+                .constrainAs(sortResultIcon) {
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                    start.linkTo(sortResultDropDownMenu.end)
+                }
+                .padding(4.dp),
             onClick = {
                 isExpanded = !isExpanded
             }
@@ -170,7 +181,7 @@ fun OptionsMenuBar(
                 numberOptionsList.forEach {
                     DropdownMenuItem(
                         onClick = {
-                            numberIndexItem =it
+                            numberIndexItem = it
                             isLimitSelectorExpanded = false
                             onLimitChange(numberIndexItem)
                         }
