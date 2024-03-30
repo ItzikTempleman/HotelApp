@@ -7,7 +7,6 @@ import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
 import com.itzik.hotelapp.ui.theme.project.repositories.IRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -62,17 +61,6 @@ class PropertyViewModel @Inject constructor(
             return@flow
         }
         return propertyInfoObjList
-    }
-
-    private val _isDrawerOpened = MutableStateFlow(false)
-    val isDrawerOpened: Flow<Boolean> = _isDrawerOpened
-
-    fun openDrawer() {
-        _isDrawerOpened.value = true
-    }
-
-    fun closeDrawer() {
-        _isDrawerOpened.value = false
     }
 
 }

@@ -4,32 +4,32 @@
     <string name="log_in" translatable="false">Log in</string>
     <string name="email" translatable="false">Enter username (email)</string>
     <string name="password" translatable="false">Enter password</string>
-    <string name="register" translatable="false">Sign up\n</string>
+    <string name="register" translatable="false">Sign up</string>
     <string name="find_properties_or_hotels" translatable="false">Find properties or hotels</string>
-    <string name="registration" translatable="false">Registration\n</string>
+    <string name="registration" translatable="false">Registration</string>
     <string name="create_name" translatable="false">Enter full name</string>
     <string name="create_email" translatable="false">Create email (user name)</string>
     <string name="create_password" translatable="false">Create password</string>
     <string name="enter_phone_number" translatable="false">Enter Phone Number</string>
-    <string name="create_user" translatable="false">Create user\n</string>
+    <string name="create_user" translatable="false">Create user</string>
     <string name="user_info" translatable="false">Profile</string>
     <string name="full_name" translatable="false">Name</string>
     <string name="user_email" translatable="false">Email</string>
     <string name="user_id" translatable="false">id</string>
     <string name="search" translatable="false">Search</string>
     <string name="find_properties" translatable="false">Find properties</string>
-    <string name="home" translatable="false">Home\n</string>
+    <string name="home" translatable="false">Home</string>
     <string name="log_out" translatable="false">Log out</string>
-    <string name="check_in_date" translatable="false">Check In\n</string>
-    <string name="check_out_date" translatable="false">Check Out\n</string>
+    <string name="check_in_date" translatable="false">Check In</string>
+    <string name="check_out_date" translatable="false">Check Out</string>
     <string name="book" translatable="false">Book</string>
-    <string name="blank_search" translatable="false">Cannot fetch data - Empty search field</string>
+    <string name="blank_search" translatable="false">Search</string>
     <string name="check_in_error" translatable="false">Must be earlier</string>
     <string name="check_out_error" translatable="false">Must be later</string>
     <string name="limit_results" translatable="false">Limit</string>
     <string name="sort_by" translatable="false">Sort by</string>
     <string name="liked_hotels" translatable="false">Liked</string>
     <string name="book_your_vacation" translatable="false">Book your vacation</string>
-    <string name="settings" translatable="false">Settings\n</string>
+    <string name="settings" translatable="false">Settings</string>
 
 </resources>

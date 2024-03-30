@@ -54,7 +54,6 @@ object AppModule {
         Room.databaseBuilder(applicationContext, UserDatabase::class.java, USER_DATABASE)
             .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
-           //.addTypeConverter(Converters())
             .fallbackToDestructiveMigration().build()
 
 

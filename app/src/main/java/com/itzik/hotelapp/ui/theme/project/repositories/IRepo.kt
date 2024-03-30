@@ -35,17 +35,7 @@ interface IRepo {
     ):Response<PropertyInfoResponse>
 
 
-    suspend fun updateProfileImageUri(user: User)
+    suspend fun updateProfileImage(user: User)
 
 
 }
-
-
-//
-//    suspend fun updateIsLiked(user: User, likedHotel: Hotel)
-//
-//    suspend fun getLikedList(user:User):MutableList<Hotel>
-//
-//    suspend fun clearLikedList()
-
-//}

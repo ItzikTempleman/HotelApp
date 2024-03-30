@@ -25,7 +25,6 @@ import androidx.compose.material.icons.filled.PowerSettingsNew
 import androidx.compose.material.icons.outlined.Call
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -38,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -69,16 +69,17 @@ fun ProfileScreen(
         mutableStateOf(false)
     }
     var selectedImageUri by remember {
-        mutableStateOf(Uri.parse(user.profileImage))
+        mutableStateOf(user.profileImage)
     }
 
 
     val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
-        onResult = {
+        onResult = { uri ->
+//            Log.d("TAG","selectedImageUri: $selectedImageUri")
             coroutineScope.launch {
-                selectedImageUri = it
-                userViewModel.updateProfileImageUri(selectedImageUri)
+                selectedImageUri = uri.toString()
+                userViewModel.updateProfileImage(Uri.parse(selectedImageUri))
             }
         }
     )
@@ -87,6 +88,7 @@ fun ProfileScreen(
         modifier = modifier.fillMaxSize(),
     ) {
         val (imageContainer, name, editIcon, uploadImageButton, done, email, phone, signOut) = createRefs()
+
 
         Box(
             modifier = Modifier
@@ -99,25 +101,17 @@ fun ProfileScreen(
                 .clip(CircleShape)
                 .border(1.dp, Color.Gray, CircleShape)
         ) {
-            if (selectedImageUri != null) {
-                Image(
-                    painter = rememberAsyncImagePainter(model = selectedImageUri),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(CircleShape)
-                )
-            } else {
-                Image(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(CircleShape)
-                )
-            }
+
+            Image(
+                painter = if (!selectedImageUri.isNullOrEmpty()) rememberAsyncImagePainter(model = selectedImageUri) else painterResource(
+                    id = R.drawable.baseline_person_24
+                ),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(CircleShape)
+            )
         }
 
         Text(
@@ -254,7 +248,7 @@ fun ProfileScreen(
                 navController.navigate(ScreenContainer.Login.route)
             },
             elevation = ButtonDefaults.elevation(
-                defaultElevation = 8.dp
+                defaultElevation = 12.dp
             )
         ) {
             Row(

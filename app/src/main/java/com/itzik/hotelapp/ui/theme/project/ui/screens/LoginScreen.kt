@@ -127,7 +127,7 @@ fun LoginScreen(
             modifier = Modifier
                 .constrainAs(loginBtn) {
                     bottom.linkTo(signUpBtn.top)
-                },
+                }.padding(horizontal = 8.dp),
             onButtonClick = {
                 if (!userViewModel.isValidEmail(email)) {
                     isEmailError = true

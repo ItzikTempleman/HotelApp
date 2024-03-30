@@ -105,7 +105,6 @@ fun HomeScreen(
                             IconButton(
                                 onClick = {
                                     scope.launch {
-                                        propertyViewModel.closeDrawer()
                                         drawerState.close()
                                     }
                                 },
@@ -154,7 +153,6 @@ fun HomeScreen(
                             navigationIcon = {
                                 IconButton(onClick = {
                                     scope.launch {
-                                        propertyViewModel.openDrawer()
                                         drawerState.open()
                                     }
                                 }) {

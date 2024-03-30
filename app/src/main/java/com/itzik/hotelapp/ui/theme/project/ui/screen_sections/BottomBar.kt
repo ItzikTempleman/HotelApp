@@ -16,11 +16,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -44,23 +40,8 @@ fun BottomBar(
     propertyViewModel: PropertyViewModel
 ) {
 
-    var isRowBackgroundGray by remember { mutableStateOf(false) }
 
-    LaunchedEffect(propertyViewModel) {
-        propertyViewModel.isDrawerOpened.collect {
-            isRowBackgroundGray = it
-        }
-    }
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(
-                if (isRowBackgroundGray) colorResource(id = R.color.transparent) else colorResource(
-                    id = R.color.transparent
-                )
-            )
-    ) {
+    Row(modifier = Modifier.fillMaxWidth().background(Color.White)) {
 
         val screens = listOf(
             ScreenContainer.Home,
@@ -107,7 +88,7 @@ fun RowScope.AddItem(
         it.route == screen.route
     } == true
 
-    val contentColor= if(selected) colorResource(id = R.color.dark_blue) else Color.Gray
+    val contentColor = if (selected) colorResource(id = R.color.dark_blue) else Color.Gray
 
     Box(
         modifier = Modifier

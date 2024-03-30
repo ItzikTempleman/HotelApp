@@ -30,17 +30,7 @@ interface UserDao {
 
 
     @Update
-    suspend fun updateProfileImageUri(user: User)
-
-
-//    @Update
-//    suspend fun updateIsLiked(user: User, likedHotel: Hotel)
-//
-//    @Query("SELECT*FROM $USER_TABLE WHERE isItemLiked=1")
-//    suspend fun getLikedList(user: User):MutableList<Hotel>
-//
-//    @Query("DELETE FROM $USER_TABLE WHERE isItemLiked=1")
-//    suspend fun clearLikedList()
+    suspend fun updateProfileImage(user: User)
 
 }
 

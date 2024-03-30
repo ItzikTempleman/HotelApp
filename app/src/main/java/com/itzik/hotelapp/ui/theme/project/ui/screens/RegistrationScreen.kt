@@ -211,7 +211,7 @@ fun RegistrationScreen(
             modifier = Modifier
                 .constrainAs(signUpBtn) {
                     bottom.linkTo(parent.bottom)
-                },
+                }.padding(8.dp),
             onButtonClick = {
                 if (!userViewModel.isValidEmail(createEmail)) {
                     isNewEmailError = true

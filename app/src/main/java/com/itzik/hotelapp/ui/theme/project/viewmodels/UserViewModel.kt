@@ -16,12 +16,24 @@ class UserViewModel @Inject constructor(
     private val repo: IRepo
 ) : ViewModel() {
 
-    fun createUser(name: String, email: String, password: String, phoneNumber: Long, profileImage: String): User {
-        Log.d("TAG","$phoneNumber")
-        return User(userName = name, email = email, password = password, isLoggedIn = true, isItemLiked = false, phoneNumber = phoneNumber, profileImage = profileImage //savedHotels = mutableListOf()
+    fun createUser(
+        name: String,
+        email: String,
+        password: String,
+        phoneNumber: Long,
+        profileImage: String
+    ): User {
+        Log.d("TAG", "$phoneNumber")
+        return User(
+            userName = name,
+            email = email,
+            password = password,
+            isLoggedIn = true,
+            isItemLiked = false,
+            phoneNumber = phoneNumber,
+            profileImage = profileImage //savedHotels = mutableListOf()
         )
     }
-
 
 
     suspend fun insertUser(user: User) = repo.insertUser(user)
@@ -47,23 +59,14 @@ class UserViewModel @Inject constructor(
     suspend fun updateIsLoggedIn(user: User) = repo.updateIsLoggedIn(user)
 
 
-    suspend fun updateProfileImageUri(uri: Uri) {
+    suspend fun updateProfileImage(uri: Uri) {
+
         val loggedInUser = repo.fetchLoggedInUsers()
         loggedInUser.first().let {
             it.profileImage = uri.toString()
-            repo.updateProfileImageUri(it)
+            repo.updateProfileImage(it)
         }
     }
-
-
-    //suspend fun postUser(user: User, id: String) = repo.postUser(id, user)
-
-
-//    suspend fun getLikedHotels(user:User) = repo.getLikedList(user)
-//
-//    suspend fun updateIsLiked(user: User, likedHotel: Hotel) = repo.updateIsLiked(user, likedHotel)
-//
-//    suspend fun clearLikedHotelList() = repo.clearLikedList()
 
 
     fun isValidEmail(email: String): Boolean =
