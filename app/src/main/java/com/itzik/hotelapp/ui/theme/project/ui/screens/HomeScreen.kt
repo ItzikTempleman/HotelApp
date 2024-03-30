@@ -50,6 +50,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.itzik.hotelapp.R
 import com.itzik.hotelapp.ui.theme.project.model.User
+import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.ScreenContainer
 import com.itzik.hotelapp.ui.theme.project.ui.screen_sections.HotelCard
 import com.itzik.hotelapp.ui.theme.project.ui.screen_sections.OptionsMenuBar
@@ -66,6 +67,7 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "CoroutineCreationDuringComposition")
 @Composable
 fun HomeScreen(
+    propertyList: PropertyInfoResponse?=null,
     modifier: Modifier,
     propertyViewModel: PropertyViewModel,
     coroutineScope: CoroutineScope,
@@ -80,6 +82,8 @@ fun HomeScreen(
     var propertyInfo by remember {
         mutableStateOf(getEmptyMockData())
     }
+
+    if(propertyList!=null) propertyInfo=propertyList
     var pageLimit by remember {
         mutableIntStateOf(10)
     }

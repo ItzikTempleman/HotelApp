@@ -77,7 +77,11 @@ fun BottomBarNavHost(
             ) {
 
                 composable(route = ScreenContainer.Home.route) {
+                    val propertyList = newNavController.previousBackStackEntry?.savedStateHandle?.get<PropertyInfoResponse>(
+                            "propertyList"
+                        )
                     HomeScreen(
+                        propertyList=propertyList,
                         modifier = Modifier,
                         userViewModel = userViewModel,
                         propertyViewModel = propertyViewModel,

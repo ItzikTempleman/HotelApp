@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -22,10 +21,8 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowCircleLeft
-import androidx.compose.material.icons.outlined.CompareArrows
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -35,11 +32,11 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
+import com.itzik.hotelapp.ui.theme.project.ui.navigation.ScreenContainer
 import com.itzik.hotelapp.ui.theme.project.utils.getEmptyMockHotel
 import com.itzik.hotelapp.ui.theme.project.viewmodels.PropertyViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -55,12 +52,6 @@ fun DetailsScreen(
     coroutineScope: CoroutineScope,
     propertyInfo: PropertyInfoResponse
 ) {
-    var columnNumber by remember {
-        mutableIntStateOf(4)
-    }
-    var isColumnNumberVisible by remember {
-        mutableStateOf(false)
-    }
 
     val state = rememberCollapsingToolbarScaffoldState()
 
@@ -69,6 +60,10 @@ fun DetailsScreen(
         hotel = hotelItem
     }
 
+    navController.currentBackStackEntry?.savedStateHandle?.set(
+        key = "propertyList",
+        value = propertyInfo.infoData.hotels
+    )
 
     CollapsingToolbarScaffold(
         modifier = Modifier.fillMaxSize(),
@@ -78,7 +73,7 @@ fun DetailsScreen(
             ConstraintLayout(
                 modifier = Modifier.fillMaxSize()
             ) {
-                val (image, icon, text, numberOfColumns) = createRefs()
+                val (image, icon, text) = createRefs()
 
                 Image(
                     painter = rememberAsyncImagePainter(model = propertyInfo.infoData.hotels.first().images.first()),
@@ -94,44 +89,19 @@ fun DetailsScreen(
 
                 IconButton(
                     onClick = {
-
+                        navController.navigate(ScreenContainer.Home.route)
                     },
-                    modifier = Modifier
-                        .padding(16.dp)
+                    modifier = Modifier.padding(top=16.dp)
                         .constrainAs(icon) {
                             top.linkTo(parent.top)
                             start.linkTo(parent.start)
                         }
-                        .size(36.dp)
-                        .zIndex(1f)
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.ArrowCircleLeft,
                         contentDescription = null,
                     )
                 }
-
-                IconButton(
-                    onClick = {
-                        isColumnNumberVisible=true
-                    },
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .constrainAs(numberOfColumns) {
-                            top.linkTo(parent.top)
-                            end.linkTo(parent.end)
-                        }
-                        .size(36.dp)
-                        .zIndex(1f)
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.CompareArrows,
-                        contentDescription = null,
-                    )
-                }
-
-
-
 
                 Text(
                     text = hotel.name,
@@ -144,7 +114,6 @@ fun DetailsScreen(
                             start.linkTo(icon.end)
                         }
                         .padding(16.dp)
-                        .zIndex(1f)
                 )
             }
         },
@@ -167,7 +136,7 @@ fun DetailsScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .wrapContentHeight(),
-                                columns = GridCells.Fixed(columnNumber)
+                                columns = GridCells.Fixed(5)
                             ) {
                                 items(propertyInfo.infoData.hotels) { hotel ->
                                     hotel.images.forEach { imageUrl ->
