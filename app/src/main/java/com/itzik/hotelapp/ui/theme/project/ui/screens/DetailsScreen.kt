@@ -16,15 +16,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowCircleLeft
+import androidx.compose.material.icons.outlined.CompareArrows
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -54,6 +55,13 @@ fun DetailsScreen(
     coroutineScope: CoroutineScope,
     propertyInfo: PropertyInfoResponse
 ) {
+    var columnNumber by remember {
+        mutableIntStateOf(4)
+    }
+    var isColumnNumberVisible by remember {
+        mutableStateOf(false)
+    }
+
     val state = rememberCollapsingToolbarScaffoldState()
 
     var hotel by remember { mutableStateOf(getEmptyMockHotel()) }
@@ -68,17 +76,19 @@ fun DetailsScreen(
         scrollStrategy = ScrollStrategy.EnterAlways,
         toolbar = {
             ConstraintLayout(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(330.dp)
+                modifier = Modifier.fillMaxSize()
             ) {
-                val (icon, text) = createRefs()
+                val (image, icon, text, numberOfColumns) = createRefs()
 
                 Image(
                     painter = rememberAsyncImagePainter(model = propertyInfo.infoData.hotels.first().images.first()),
                     contentDescription = null,
                     modifier = Modifier
-                        .fillMaxSize(),
+                        .constrainAs(image) {
+                            top.linkTo(parent.top)
+                        }
+                        .fillMaxWidth()
+                        .height(330.dp),
                     contentScale = ContentScale.Crop,
                 )
 
@@ -86,7 +96,8 @@ fun DetailsScreen(
                     onClick = {
 
                     },
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier
+                        .padding(16.dp)
                         .constrainAs(icon) {
                             top.linkTo(parent.top)
                             start.linkTo(parent.start)
@@ -100,6 +111,28 @@ fun DetailsScreen(
                     )
                 }
 
+                IconButton(
+                    onClick = {
+                        isColumnNumberVisible=true
+                    },
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .constrainAs(numberOfColumns) {
+                            top.linkTo(parent.top)
+                            end.linkTo(parent.end)
+                        }
+                        .size(36.dp)
+                        .zIndex(1f)
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.CompareArrows,
+                        contentDescription = null,
+                    )
+                }
+
+
+
+
                 Text(
                     text = hotel.name,
                     fontSize = 28.sp,
@@ -109,23 +142,22 @@ fun DetailsScreen(
                         .constrainAs(text) {
                             top.linkTo(parent.top)
                             start.linkTo(icon.end)
-                        }.padding(16.dp)
+                        }
+                        .padding(16.dp)
                         .zIndex(1f)
                 )
-
             }
-
         },
         body = {
             LazyColumn(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxSize()
             ) {
                 item {
                     Card(
                         modifier = Modifier
                             .height(900.dp)
-                            .fillMaxWidth(),
-                        shape = RoundedCornerShape(30.dp)
+                            .fillMaxWidth()
                     ) {
                         Column(
                             modifier = Modifier.fillMaxWidth(),
@@ -135,7 +167,7 @@ fun DetailsScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .wrapContentHeight(),
-                                columns = GridCells.Fixed(4)
+                                columns = GridCells.Fixed(columnNumber)
                             ) {
                                 items(propertyInfo.infoData.hotels) { hotel ->
                                     hotel.images.forEach { imageUrl ->
