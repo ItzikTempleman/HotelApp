@@ -64,7 +64,7 @@ fun OptionsMenuBar(
         modifier = modifier
     ) {
         val (sortResultText, sortResultBox, sortResultDropDownMenu, sortResultIcon, limitResultText, limitResultBox, limitResultDropDownMenu, limitResultIcon) = createRefs()
-//TODO ADD HERE A COLUMN WITH TWO NESTED ROWS- EACH ROW IS A SORT OR LIMIT FOILED AND THEY ARE ONE ABOVE THE OTHER INSTEAD OF ONE TO THE OTHERS SIDE
+        //TODO ADD HERE A COLUMN WITH TWO NESTED ROWS- EACH ROW IS A SORT OR LIMIT FOILED AND THEY ARE ONE ABOVE THE OTHER INSTEAD OF ONE TO THE OTHERS SIDE
         Text(
             modifier = Modifier
                 .constrainAs(sortResultText) {
