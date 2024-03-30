@@ -71,7 +71,7 @@ fun DetailsScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(380.dp)
+                    .height(330.dp)
                     .pin()
             ) {
                 Column (
