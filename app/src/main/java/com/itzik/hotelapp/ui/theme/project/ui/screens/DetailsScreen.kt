@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,6 +35,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
@@ -69,68 +71,81 @@ fun DetailsScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp)
+                    .height(380.dp)
                     .pin()
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Start
+                Column (
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    Icon(
-                        imageVector = Icons.Outlined.ArrowCircleLeft,
-                        contentDescription = null,
+                    Row(
                         modifier = Modifier
-                            .size(28.dp)
-                            .clickable {
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.ArrowCircleLeft,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(28.dp)
+                                .clickable {
 
-                            }
-                    )
-                    Text(
-                        text = hotel.name,
-                        fontSize = textSize,
-                        fontStyle = FontStyle.Italic,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(start = 20.dp)
-                    )
+                                }
+                                .zIndex(3f)
+                        )
+                        Text(
+                            text = hotel.name,
+                            fontSize = textSize,
+                            fontStyle = FontStyle.Italic,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(start = 20.dp)
+                                .zIndex(3f)
+                        )
+                    }
                 }
                 Image(
                     painter = rememberAsyncImagePainter(model = propertyInfo.infoData.hotels.first().images.first()),
                     contentDescription = null,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .aspectRatio(1f),
                     contentScale = ContentScale.Crop,
                 )
             }
         }
     ) {
-        
+
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {
             item {
                 Card(
                     modifier = Modifier
-                        .height(500.dp)
+                        .height(900.dp)
                         .fillMaxWidth()
                         .padding(8.dp)
                 ) {
-                    LazyVerticalGrid(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight(),
-                        columns = GridCells.Fixed(4)
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalArrangement = Arrangement.Top
                     ) {
-                        items(propertyInfo.infoData.hotels) { hotel ->
-                            hotel.images.forEach { imageUrl ->
-                                val image = rememberAsyncImagePainter(model = imageUrl)
-                                Image(
-                                    painter = image,
-                                    contentDescription = null,
-                                    modifier = Modifier
-                                        .aspectRatio(1f),
-                                    contentScale = ContentScale.Crop
-                                )
+                        LazyVerticalGrid(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight(),
+                            columns = GridCells.Fixed(4)
+                        ) {
+                            items(propertyInfo.infoData.hotels) { hotel ->
+                                hotel.images.forEach { imageUrl ->
+                                    val image = rememberAsyncImagePainter(model = imageUrl)
+                                    Image(
+                                        painter = image,
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .aspectRatio(1f),
+                                        contentScale = ContentScale.Crop
+                                    )
+                                }
                             }
                         }
                     }
