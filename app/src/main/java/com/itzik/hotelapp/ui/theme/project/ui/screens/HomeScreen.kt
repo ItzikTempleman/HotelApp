@@ -3,6 +3,7 @@ package com.itzik.hotelapp.ui.theme.project.ui.screens
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -198,7 +199,7 @@ fun HomeScreen(
                     content = {
                         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
                             LazyColumn(
-                                modifier = modifier.fillMaxSize(),
+                                modifier = modifier.fillMaxSize().background(Color.White),
                                 state = listState
                             ) {
                                 item {

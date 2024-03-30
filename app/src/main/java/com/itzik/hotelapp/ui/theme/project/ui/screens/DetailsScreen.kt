@@ -104,10 +104,7 @@ fun DetailsScreen(
             }
         }
     ) {
-
-            //alpha = if (textSize.value == 18f) 0f else 1f
-
-
+        
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -144,97 +141,6 @@ fun DetailsScreen(
 }
 
 
-//    Surface(
-//        modifier = Modifier.fillMaxSize()
-//    ) {
-//        Scaffold(
-//            topBar = {
-//                TopAppBar(
-//                    backgroundColor = Color.White,
-//                    contentColor = Color.Black,
-//
-//                    title = {
-//                        Row(
-//                            modifier = Modifier
-//                                .fillMaxWidth(),
-//                            horizontalArrangement = Arrangement.Start
-//                        ) {
-//
-//                            Icon(
-//                                imageVector = Icons.Outlined.ArrowCircleLeft,
-//                                contentDescription = null,
-//                                modifier = Modifier
-//                                    .size(28.dp)
-//                                    .clickable {
-//
-//                                    }
-//                            )
-//
-//                            Text(
-//                                text = hotel.name,
-//                                fontSize = 24.sp,
-//                                fontStyle = FontStyle.Italic,
-//                                fontWeight = FontWeight.Bold,
-//                                modifier = Modifier.padding(start = 20.dp)
-//                            )
-//                        }
-//                    }
-//                )
-//            },
-//
-//            content = {
-//                Box(
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .verticalScroll(rememberScrollState())
-//                ) {
-//                    LazyColumn(
-//                        modifier = Modifier.fillMaxSize(),
-//                        state = state
-//                    ) {
-//                        item {
-//                            Image(
-//                                painter = rememberAsyncImagePainter(model = propertyInfo.infoData.hotels.first().images.first()),
-//                                contentDescription = null,
-//                                modifier = Modifier
-//                                    .fillMaxWidth()
-//                                    .aspectRatio(1f),
-//                                contentScale = ContentScale.Crop,
-//                            )
-//                        }
-//                        item {
-//                            Box(
-//                                modifier = Modifier
-//                                    .fillMaxWidth()
-//                                    .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-//                                    .padding(8.dp)
-//                            ) {
-//
-//                                LazyVerticalGrid(
-//                                    modifier = Modifier
-//                                        .fillMaxWidth(),
-//                                    columns = GridCells.Fixed(4)
-//                                ) {
-//                                    items(propertyInfo.infoData.hotels) { hotel ->
-//                                        hotel.images.forEach { imageUrl ->
-//                                            val image = rememberAsyncImagePainter(model = imageUrl)
-//                                            Image(
-//                                                painter = image,
-//                                                contentDescription = null,
-//                                                modifier = Modifier
-//                                                    .aspectRatio(1f),
-//                                                contentScale = ContentScale.Crop
-//                                            )
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        )
-//    }
-//}
+
 
 
