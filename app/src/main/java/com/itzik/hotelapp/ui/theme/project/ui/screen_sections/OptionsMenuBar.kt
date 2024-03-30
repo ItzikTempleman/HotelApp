@@ -2,8 +2,11 @@ package com.itzik.hotelapp.ui.theme.project.ui.screen_sections
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -31,7 +34,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import com.itzik.hotelapp.R
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.items
 
@@ -60,177 +62,157 @@ fun OptionsMenuBar(
     val numberOptionsList by remember { mutableStateOf(listOf(10, 20, 30)) }
     var numberIndexItem by remember { mutableIntStateOf(numberOptionsList.first()) }
 
-    ConstraintLayout(
-        modifier = modifier
+    Column(
+        modifier = modifier.fillMaxWidth()
     ) {
-        val (sortResultText, sortResultBox, sortResultDropDownMenu, sortResultIcon, limitResultText, limitResultBox, limitResultDropDownMenu, limitResultIcon) = createRefs()
-        //TODO ADD HERE A COLUMN WITH TWO NESTED ROWS- EACH ROW IS A SORT OR LIMIT FOILED AND THEY ARE ONE ABOVE THE OTHER INSTEAD OF ONE TO THE OTHERS SIDE
-        Text(
-            modifier = Modifier
-                .constrainAs(sortResultText) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(parent.start)
-                }
-                .padding(4.dp),
-            text = stringResource(id = R.string.sort_by),
-            fontFamily = FontFamily.Monospace,
-            fontSize = 16.sp,
-        )
-
-        Column(
-            modifier = Modifier
-                .constrainAs(sortResultBox) {
-                    top.linkTo(parent.top)
-                    start.linkTo(sortResultText.end)
-                }
-                .padding(4.dp),
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            DropdownMenu(
-                modifier = Modifier.width(100.dp),
-                expanded = isExpanded,
-                onDismissRequest = {
-                    isExpanded = false
-                }
+            Text(
+                modifier = Modifier
+
+                    .padding(4.dp),
+                text = stringResource(id = R.string.sort_by),
+                fontFamily = FontFamily.Monospace,
+                fontSize = 16.sp,
+            )
+
+            Column(
+                modifier = Modifier
+
+                    .padding(4.dp),
             ) {
-                items.forEach {
-                    DropdownMenuItem(
-                        onClick = {
-                            sortOptionsIndexItem = it
-                            isExpanded = false
-                            onSortSelect(sortOptionsIndexItem.title)
+                DropdownMenu(
+                    modifier = Modifier.width(100.dp),
+                    expanded = isExpanded,
+                    onDismissRequest = {
+                        isExpanded = false
+                    }
+                ) {
+                    items.forEach {
+                        DropdownMenuItem(
+                            onClick = {
+                                sortOptionsIndexItem = it
+                                isExpanded = false
+                                onSortSelect(sortOptionsIndexItem.title)
+                            }
+                        ) {
+                            Text(text = it.title)
                         }
-                    ) {
-                        Text(text = it.title)
                     }
                 }
             }
-        }
 
 
-        Box(
-            modifier = Modifier
-                .constrainAs(sortResultDropDownMenu) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(sortResultBox.end)
-                }
-                .height(30.dp)
-                .width(70.dp)
-                .border(
-                    0.7.dp,
-                    Color.Black,
-                    shape = RoundedCornerShape(8.dp)
+            Box(
+                modifier = Modifier
+
+                    .height(30.dp)
+                    .width(70.dp)
+                    .border(
+                        0.7.dp,
+                        Color.Black,
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Color.White)
+            ) {
+                Text(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = sortOptionsIndexItem.title,
+                    color = Color.Black,
+                    fontSize = 16.sp
                 )
-                .clip(RoundedCornerShape(8.dp))
-                .background(Color.White)
-        ) {
-            Text(
-                modifier = Modifier.align(Alignment.Center),
-                text = sortOptionsIndexItem.title,
-                color = Color.Black,
-                fontSize = 16.sp
-            )
-        }
-
-        IconButton(
-            modifier = Modifier
-                .constrainAs(sortResultIcon) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(sortResultDropDownMenu.end)
-                }
-                .padding(4.dp),
-            onClick = {
-                isExpanded = !isExpanded
             }
-        ) {
-            Icon(
-                imageVector = expansionIcon,
-                contentDescription = null
-            )
-        }
 
-        Text(
-            modifier = Modifier
-                .constrainAs(limitResultText) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(sortResultIcon.end)
-                }
-                .padding(4.dp),
-            text = stringResource(id = R.string.limit_results),
-            fontFamily = FontFamily.Monospace,
-            fontSize = 16.sp,
-        )
-
-        Column(
-            modifier = Modifier
-                .constrainAs(limitResultDropDownMenu) {
-                    start.linkTo(limitResultText.end)
-                    top.linkTo(limitResultBox.bottom)
-                }
-        ) {
-            DropdownMenu(
-                modifier = Modifier.width(60.dp),
-                expanded = isLimitSelectorExpanded,
-                onDismissRequest = {
-                    isLimitSelectorExpanded = false
+            IconButton(
+                modifier = Modifier
+                    .padding(4.dp),
+                onClick = {
+                    isExpanded = !isExpanded
                 }
             ) {
-                numberOptionsList.forEach {
-                    DropdownMenuItem(
-                        onClick = {
-                            numberIndexItem = it
-                            isLimitSelectorExpanded = false
-                            onLimitChange(numberIndexItem)
+                Icon(
+                    imageVector = expansionIcon,
+                    contentDescription = null
+                )
+            }
+        }
+
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                modifier = Modifier
+
+                    .padding(4.dp),
+                text = stringResource(id = R.string.limit_results),
+                fontFamily = FontFamily.Monospace,
+                fontSize = 16.sp,
+            )
+
+            Column(
+                modifier = Modifier
+
+            ) {
+                DropdownMenu(
+                    modifier = Modifier.width(60.dp),
+                    expanded = isLimitSelectorExpanded,
+                    onDismissRequest = {
+                        isLimitSelectorExpanded = false
+                    }
+                ) {
+                    numberOptionsList.forEach {
+                        DropdownMenuItem(
+                            onClick = {
+                                numberIndexItem = it
+                                isLimitSelectorExpanded = false
+                                onLimitChange(numberIndexItem)
+                            }
+                        ) {
+                            Text(text = it.toString())
                         }
-                    ) {
-                        Text(text = it.toString())
                     }
                 }
             }
-        }
 
-        Box(
-            modifier = Modifier
-                .size(30.dp)
-                .constrainAs(limitResultBox) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(limitResultDropDownMenu.end)
-                }
-                .clip(RoundedCornerShape(8.dp))
-                .background(Color.White)
-                .border(
-                    0.7.dp,
-                    Color.Black,
-                    shape = RoundedCornerShape(8.dp),
+            Box(
+                modifier = Modifier
+                    .size(30.dp)
+
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Color.White)
+                    .border(
+                        0.7.dp,
+                        Color.Black,
+                        shape = RoundedCornerShape(8.dp),
+                    )
+            ) {
+                Text(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = numberIndexItem.toString(),
+                    color = Color.Black,
+                    fontSize = 16.sp
                 )
-        ) {
-            Text(
-                modifier = Modifier.align(Alignment.Center),
-                text = numberIndexItem.toString(),
-                color = Color.Black,
-                fontSize = 16.sp
-            )
-        }
-
-
-        IconButton(
-            modifier = Modifier.constrainAs(limitResultIcon) {
-                top.linkTo(parent.top)
-                bottom.linkTo(parent.bottom)
-                start.linkTo(limitResultBox.end)
-            },
-            onClick = {
-                isLimitSelectorExpanded = !isLimitSelectorExpanded
             }
-        ) {
-            Icon(
-                imageVector = limitExpansionIcon,
-                contentDescription = null
-            )
+
+
+            IconButton(
+                modifier = Modifier,
+                onClick = {
+                    isLimitSelectorExpanded = !isLimitSelectorExpanded
+                }
+            ) {
+                Icon(
+                    imageVector = limitExpansionIcon,
+                    contentDescription = null
+                )
+            }
         }
     }
 }

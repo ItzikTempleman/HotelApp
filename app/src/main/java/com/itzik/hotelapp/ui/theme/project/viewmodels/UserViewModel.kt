@@ -16,6 +16,7 @@ class UserViewModel @Inject constructor(
     private val repo: IRepo
 ) : ViewModel() {
 
+
     fun createUser(
         name: String,
         email: String,
@@ -75,6 +76,7 @@ class UserViewModel @Inject constructor(
 
     fun isValidPassword(password: String): Boolean =
         password.matches(Constants.passwordRegex)
+
 
 
 }

@@ -63,4 +63,26 @@ class PropertyViewModel @Inject constructor(
         return propertyInfoObjList
     }
 
+    suspend fun sortPropertyList(
+        sortedLabel: String,
+        propertyInfo: PropertyInfoResponse
+    ): Flow<PropertyInfoResponse> {
+        return flow {
+            val newHotelList = when (sortedLabel) {
+                "Price" -> propertyInfo.infoData.copy(
+                    hotels = propertyInfo.infoData.hotels.sortedBy { it.price }
+                )
+
+                "Ratings" -> propertyInfo.infoData.copy(
+                    hotels = propertyInfo.infoData.hotels.sortedBy { it.rating?.value }
+                )
+
+                else -> propertyInfo.infoData.copy(
+                    hotels = propertyInfo.infoData.hotels.sortedBy { it.name }
+                )
+            }
+            emit(PropertyInfoResponse(newHotelList))
+        }
+    }
+
 }

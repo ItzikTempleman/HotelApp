@@ -82,6 +82,10 @@ fun HomeScreen(
     var pageLimit by remember {
         mutableIntStateOf(10)
     }
+    var sortedLabel by remember {
+        mutableStateOf("")
+    }
+
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -92,6 +96,7 @@ fun HomeScreen(
         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
             ModalNavigationDrawer(
                 drawerContent = {
+
                     ModalDrawerSheet {
 
                         ConstraintLayout(
@@ -135,11 +140,18 @@ fun HomeScreen(
                                         pageLimit = it
                                     },
                                     onSortSelect = {
-
+                                        sortedLabel = it
+                                        coroutineScope.launch {
+                                            propertyViewModel.sortPropertyList(
+                                                sortedLabel,
+                                                propertyInfo
+                                            ).collect {
+                                                propertyInfo = it
+                                            }
+                                        }
                                     }
                                 )
                             }
-
                         }
                     }
                 },
@@ -231,9 +243,11 @@ fun HomeScreen(
                                         propertyInfo.infoData.hotels.first().coordinates.first()
                                     ).second
                                     HotelCard(
-                                        modifier = Modifier.padding(top=20.dp).clickable {
-                                            navController.navigate(ScreenContainer.Details.route)
-                                        }, hotelItem, userViewModel, user, coroutineScope
+                                        modifier = Modifier
+                                            .padding(top = 20.dp)
+                                            .clickable {
+                                                navController.navigate(ScreenContainer.Details.route)
+                                            }, hotelItem, userViewModel, user, coroutineScope
                                     )
                                 }
                             }
@@ -257,3 +271,4 @@ fun HomeScreen(
         }
     }
 }
+
