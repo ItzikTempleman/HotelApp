@@ -59,7 +59,7 @@ fun DateSelectionScreenSection(
         DatePickerDialog(
             modifier = Modifier
                 .weight(1f)
-                .padding(end = 2.dp),
+                .padding(end = 4.dp),
             errorMessage = checkInErrorMessage,
             isSelectionOfDatesAvailableReversed = false,
             insertedDate = {
@@ -81,7 +81,7 @@ fun DateSelectionScreenSection(
         DatePickerDialog(
             modifier = Modifier
                 .weight(1f)
-                .padding(start = 2.dp),
+                .padding(start = 4.dp),
             errorMessage = checkOutErrorMessage,
             isSelectionOfDatesAvailableReversed = false,
             insertedDate = {

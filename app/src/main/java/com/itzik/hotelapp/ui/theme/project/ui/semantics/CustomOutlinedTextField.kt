@@ -175,6 +175,14 @@ fun CustomTextField(
             },
             singleLine = true,
             colors = TextFieldDefaults.textFieldColors(
+                disabledTextColor = Color.White,
+                unfocusedIndicatorColor = Color.White,
+                disabledIndicatorColor = Color.White,
+                disabledLeadingIconColor = Color.White,
+                disabledTrailingIconColor = Color.White,
+                disabledLabelColor = Color.White,
+                disabledPlaceholderColor = Color.White,
+
                 backgroundColor = Color.White,
                 textColor = contentColor,
                 focusedLabelColor = Color.White,

@@ -7,7 +7,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -90,18 +89,6 @@ fun ProfileScreen(
         val (imageContainer, name, editIcon, uploadImageButton, done, email, phone, signOut) = createRefs()
 
 
-        Box(
-            modifier = Modifier
-                .constrainAs(imageContainer) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                }
-                .padding(start = 24.dp, top = 48.dp)
-                .size(80.dp)
-                .clip(CircleShape)
-                .border(1.dp, Color.Gray, CircleShape)
-        ) {
-
             Image(
                 painter = if (!selectedImageUri.isNullOrEmpty()) rememberAsyncImagePainter(model = selectedImageUri) else painterResource(
                     id = R.drawable.baseline_person_24
@@ -109,10 +96,15 @@ fun ProfileScreen(
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .fillMaxSize()
+                    .constrainAs(imageContainer) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                    }
+                    .padding(start = 24.dp, top = 48.dp)
+                    .size(80.dp)
                     .clip(CircleShape)
+                    .border(1.dp, Color.Gray, CircleShape)
             )
-        }
 
         Text(
             text = user.userName,
