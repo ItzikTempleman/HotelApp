@@ -58,20 +58,23 @@ class UserViewModel @Inject constructor(
 
     suspend fun updateIsLoggedIn(user: User) = repo.updateIsLoggedIn(user)
 
-    suspend fun updateProfileImage(user: User){
 
-        repo.updateProfileImage(user)
+
+    suspend fun updateProfileImage(uri: String) {
+        val user = repo.fetchLoggedInUsers().firstOrNull()
+        user?.let {
+            val updatedUser:User = it.copy(profileImage = uri)
+            repo.updateProfileImage(updatedUser)
+        }
     }
-
 
     suspend fun fetchProfileImage(): Flow<String?> {
         val fetchedProfileImage = flow {
-            val userProfileImage = repo.fetchLoggedInUsers().first().profileImage
+            val userProfileImage = repo.fetchLoggedInUsers().firstOrNull()?.profileImage
             emit(userProfileImage)
         }
         return fetchedProfileImage
     }
-
 
     fun isValidEmail(email: String): Boolean =
         email.matches(Constants.emailRegex)

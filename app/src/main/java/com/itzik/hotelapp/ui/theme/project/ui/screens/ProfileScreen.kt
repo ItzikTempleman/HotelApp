@@ -1,6 +1,7 @@
 package com.itzik.hotelapp.ui.theme.project.ui.screens
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,7 +27,6 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -73,7 +73,7 @@ fun ProfileScreen(
         mutableStateOf(user.profileImage)
     }
 
-    LaunchedEffect(Unit) {
+    coroutineScope.launch {
         if (!selectedImageUri.isNullOrEmpty()) {
             userViewModel.fetchProfileImage().collect {
                 selectedImageUri = it
@@ -85,13 +85,16 @@ fun ProfileScreen(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { uri ->
             coroutineScope.launch {
-                if (uri != null) {
+                if (uri != null && selectedImageUri != uri.toString()) {
                     selectedImageUri = uri.toString()
-                    userViewModel.updateProfileImage(user)
+                    userViewModel.updateProfileImage(selectedImageUri!!)
                 }
             }
         }
     )
+
+    Log.d("TAG", "selectedImageUri: $selectedImageUri")
+
 
     ConstraintLayout(
         modifier = modifier.fillMaxSize(),
