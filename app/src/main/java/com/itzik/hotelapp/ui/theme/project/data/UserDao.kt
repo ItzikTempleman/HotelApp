@@ -32,15 +32,6 @@ interface UserDao {
     suspend fun updateProfileImage(user: User)
 
 
-//    @Query("SELECT * FROM products ORDER BY price")
-//    fun getSortedByPrice(): MutableList<Product>
-//
-//    @Query("SELECT * FROM products ORDER BY name")
-//    fun getSortedByName(): MutableList<Product>
-//
-//    @Query("SELECT * FROM products ORDER BY rating DESC")
-//    fun getSortedByRating(): MutableList<Product>
-
 }
 
 

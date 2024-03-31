@@ -1,6 +1,5 @@
 package com.itzik.hotelapp.ui.theme.project.viewmodels
 
-import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.itzik.hotelapp.ui.theme.project.model.User
@@ -59,14 +58,18 @@ class UserViewModel @Inject constructor(
 
     suspend fun updateIsLoggedIn(user: User) = repo.updateIsLoggedIn(user)
 
+    suspend fun updateProfileImage(user: User){
 
-    suspend fun updateProfileImage(uri: Uri) {
+        repo.updateProfileImage(user)
+    }
 
-        val loggedInUser = repo.fetchLoggedInUsers()
-        loggedInUser.first().let {
-            it.profileImage = uri.toString()
-            repo.updateProfileImage(it)
+
+    suspend fun fetchProfileImage(): Flow<String?> {
+        val fetchedProfileImage = flow {
+            val userProfileImage = repo.fetchLoggedInUsers().first().profileImage
+            emit(userProfileImage)
         }
+        return fetchedProfileImage
     }
 
 
@@ -76,7 +79,6 @@ class UserViewModel @Inject constructor(
 
     fun isValidPassword(password: String): Boolean =
         password.matches(Constants.passwordRegex)
-
 
 
 }

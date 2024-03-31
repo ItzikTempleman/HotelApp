@@ -1,6 +1,6 @@
 package com.itzik.hotelapp.ui.theme.project.ui.screens
 
-import android.net.Uri
+import android.annotation.SuppressLint
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,6 +26,7 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -52,6 +53,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun ProfileScreen(
     modifier: Modifier,
@@ -71,14 +73,22 @@ fun ProfileScreen(
         mutableStateOf(user.profileImage)
     }
 
+    LaunchedEffect(Unit) {
+        if (!selectedImageUri.isNullOrEmpty()) {
+            userViewModel.fetchProfileImage().collect {
+                selectedImageUri = it
+            }
+        }
+    }
 
     val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { uri ->
-//            Log.d("TAG","selectedImageUri: $selectedImageUri")
             coroutineScope.launch {
-                selectedImageUri = uri.toString()
-                userViewModel.updateProfileImage(Uri.parse(selectedImageUri))
+                if (uri != null) {
+                    selectedImageUri = uri.toString()
+                    userViewModel.updateProfileImage(user)
+                }
             }
         }
     )
@@ -89,22 +99,22 @@ fun ProfileScreen(
         val (imageContainer, name, editIcon, uploadImageButton, done, email, phone, signOut) = createRefs()
 
 
-            Image(
-                painter = if (!selectedImageUri.isNullOrEmpty()) rememberAsyncImagePainter(model = selectedImageUri) else painterResource(
-                    id = R.drawable.baseline_person_24
-                ),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .constrainAs(imageContainer) {
-                        top.linkTo(parent.top)
-                        start.linkTo(parent.start)
-                    }
-                    .padding(start = 24.dp, top = 48.dp)
-                    .size(80.dp)
-                    .clip(CircleShape)
-                    .border(1.dp, Color.Gray, CircleShape)
-            )
+        Image(
+            painter = if (!selectedImageUri.isNullOrEmpty()) rememberAsyncImagePainter(model = selectedImageUri) else painterResource(
+                id = R.drawable.baseline_person_24
+            ),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .constrainAs(imageContainer) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                }
+                .padding(start = 24.dp, top = 48.dp)
+                .size(80.dp)
+                .clip(CircleShape)
+                .border(1.dp, Color.Gray, CircleShape)
+        )
 
         Text(
             text = user.userName,
