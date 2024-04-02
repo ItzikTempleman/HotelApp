@@ -85,7 +85,7 @@ fun OptionsMenuBar(
                     .padding(4.dp),
             ) {
                 DropdownMenu(
-                    modifier = Modifier.width(100.dp),
+                    modifier = Modifier.width(180.dp),
                     expanded = isExpanded,
                     onDismissRequest = {
                         isExpanded = false
@@ -99,7 +99,12 @@ fun OptionsMenuBar(
                                 onSortSelect(sortOptionsIndexItem.title)
                             }
                         ) {
-                            Text(text = it.title)
+                            Row(modifier = Modifier.fillMaxWidth()) {
+                                Icon(imageVector = it.selectedIcon, contentDescription = null)
+                                Text(
+                                    modifier=Modifier.padding(start = 4.dp),
+                                    text = it.title)
+                            }
                         }
                     }
                 }

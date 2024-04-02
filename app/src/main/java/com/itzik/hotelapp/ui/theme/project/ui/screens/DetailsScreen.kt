@@ -3,8 +3,6 @@ package com.itzik.hotelapp.ui.theme.project.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -35,8 +34,10 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
+import com.itzik.hotelapp.R
 import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.ScreenContainer
+import com.itzik.hotelapp.ui.theme.project.ui.semantics.Rating
 import com.itzik.hotelapp.ui.theme.project.utils.getEmptyMockHotel
 import com.itzik.hotelapp.ui.theme.project.viewmodels.PropertyViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -56,9 +57,13 @@ fun DetailsScreen(
     val state = rememberCollapsingToolbarScaffoldState()
 
     var hotel by remember { mutableStateOf(getEmptyMockHotel()) }
+
     for (hotelItem in propertyInfo.infoData.hotels) {
         hotel = hotelItem
     }
+
+    val rating = hotel.rating?.value?.toDouble()?.toInt()
+
 
     navController.currentBackStackEntry?.savedStateHandle?.set(
         key = "propertyList",
@@ -128,13 +133,14 @@ fun DetailsScreen(
                             .height(900.dp)
                             .fillMaxWidth()
                     ) {
-                        Column(
+                        ConstraintLayout(
                             modifier = Modifier.fillMaxWidth(),
-                            verticalArrangement = Arrangement.Top
                         ) {
+                            val (imageGrid,starRating, ratingText, ratingValue )=createRefs()
                             LazyVerticalGrid(
-                                modifier = Modifier
-                                    .fillMaxWidth()
+                                modifier = Modifier.constrainAs(imageGrid){
+                                 top.linkTo(parent.top)
+                                }.fillMaxWidth()
                                     .wrapContentHeight(),
                                 columns = GridCells.Fixed(5)
                             ) {
@@ -144,12 +150,50 @@ fun DetailsScreen(
                                         Image(
                                             painter = image,
                                             contentDescription = null,
-                                            modifier = Modifier.aspectRatio(1f),
+                                            modifier = Modifier.aspectRatio(1f).padding(4.dp),
                                             contentScale = ContentScale.Crop
                                         )
                                     }
                                 }
                             }
+
+                            hotel.rating?.value?.toDouble()?.let {
+                                Rating(
+                                    modifier = Modifier
+                                        .constrainAs(starRating) {
+                                            start.linkTo(parent.start)
+                                            top.linkTo(imageGrid.bottom)
+                                        }
+                                        .padding(horizontal = 4.dp),
+                                    rating = it
+                                )
+                            }
+
+                            Text(
+                                text = "${rating.toString()}/10",
+                                modifier = Modifier
+                                    .constrainAs(ratingValue) {
+                                        start.linkTo(starRating.end)
+                                        top.linkTo(imageGrid.bottom)
+                                    }
+                                    .padding(start = 2.dp, bottom = 2.dp),
+                                fontSize = 14.sp,
+                                color = colorResource(id = R.color.yellow),
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Text(
+                                text = "(${hotel.rating?.count.toString()} votes)",
+                                modifier = Modifier
+                                    .constrainAs(ratingText) {
+                                        start.linkTo(ratingValue.end)
+                                        top.linkTo(imageGrid.bottom)
+                                    }
+                                    .padding(start = 2.dp, bottom = 2.dp),
+                                fontSize = 12.sp,
+                            )
+
+
                         }
                     }
                 }

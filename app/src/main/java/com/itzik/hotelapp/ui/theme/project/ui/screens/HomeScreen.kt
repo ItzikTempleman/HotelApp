@@ -2,6 +2,7 @@ package com.itzik.hotelapp.ui.theme.project.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -110,7 +111,6 @@ fun HomeScreen(
                                 .padding(start = 20.dp, top = 12.dp),
                         ) {
                             val (close) = createRefs()
-
 
                             IconButton(
                                 onClick = {
@@ -247,6 +247,7 @@ fun HomeScreen(
                                         hotelItem.coordinates.last(),
                                         propertyInfo.infoData.hotels.first().coordinates.first()
                                     ).second
+                                    Log.d("TAGD","list: ${propertyInfo.infoData.hotels}")
                                     HotelCard(
                                         modifier = Modifier
                                             .padding(top = 20.dp)

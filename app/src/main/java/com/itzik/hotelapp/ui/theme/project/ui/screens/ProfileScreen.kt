@@ -75,7 +75,6 @@ fun ProfileScreen(
         mutableStateOf(user.profileImage)
     }
 
-
     LaunchedEffect(Unit) {
         if (selectedImageUri.isNotEmpty()) {
             userViewModel.fetchLoggedInUsers().collect {

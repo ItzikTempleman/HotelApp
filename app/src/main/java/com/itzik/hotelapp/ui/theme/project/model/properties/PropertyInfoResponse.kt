@@ -2,7 +2,6 @@ package com.itzik.hotelapp.ui.theme.project.model.properties
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.itzik.hotelapp.ui.theme.project.utils.Constants.USER_TABLE
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -33,7 +32,7 @@ data class Hotel(
 ) : Parcelable {
     init {
         if (price == null||price=="null") price = "Price not available"
-        if (rating == null) rating = Rating(
+        if (rating == null || rating!!.value=="0") rating = Rating(
             0,
             "Rating not available",
             "0"

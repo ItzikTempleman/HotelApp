@@ -70,11 +70,17 @@ class PropertyViewModel @Inject constructor(
         return flow {
             val newHotelList = when (sortedLabel) {
                 "Price" -> propertyInfo.infoData.copy(
-                    hotels = propertyInfo.infoData.hotels.sortedBy { it.price }
+                    hotels = propertyInfo.infoData.hotels.sortedBy {
+                        it.price?.substring(1)?.toInt()
+                    }
                 )
 
-                "Ratings" -> propertyInfo.infoData.copy(
+                "User rating" -> propertyInfo.infoData.copy(
                     hotels = propertyInfo.infoData.hotels.sortedBy { it.rating?.value }
+                )
+
+                "Star rating" -> propertyInfo.infoData.copy(
+                    hotels = propertyInfo.infoData.hotels.sortedBy { it.stars }
                 )
 
                 else -> propertyInfo.infoData.copy(
