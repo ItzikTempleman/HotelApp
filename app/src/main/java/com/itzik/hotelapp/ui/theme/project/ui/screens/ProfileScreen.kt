@@ -27,6 +27,7 @@ import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -61,7 +62,6 @@ fun ProfileScreen(
     navController: NavHostController,
     userViewModel: UserViewModel,
     user: User,
-    userImage:String
 ) {
 
     var isEditClick by remember {
@@ -72,9 +72,19 @@ fun ProfileScreen(
     }
 
     var selectedImageUri by remember {
-        mutableStateOf(userImage)
+        mutableStateOf(user.profileImage)
     }
 
+
+    LaunchedEffect(Unit) {
+        if (selectedImageUri.isNotEmpty()) {
+            userViewModel.fetchLoggedInUsers().collect {
+                if (it.isNotEmpty()) {
+                    selectedImageUri = it.first().profileImage
+                }
+            }
+        }
+    }
 
     val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),

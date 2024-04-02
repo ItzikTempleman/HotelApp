@@ -44,20 +44,11 @@ fun BottomBarNavHost(
     var userList by remember {
         mutableStateOf(listOf<User>())
     }
-    var userImage by remember {
-        mutableStateOf("")
-    }
+
     var user = User(userName = "", email = "", password = "", isItemLiked = false, phoneNumber = 0)
 
 
-    coroutineScope.launch {
-        userViewModel.fetchLoggedInUsers().collect {
-            if (userList.isNotEmpty()) {
-                val firstUser = userList.first()
-                userImage = firstUser.profileImage
-            }
-        }
-    }
+
 
     LaunchedEffect(key1 = true) {
         coroutineScope.launch {
@@ -132,7 +123,7 @@ fun BottomBarNavHost(
                         userViewModel = userViewModel,
                         coroutineScope = coroutineScope,
                         user = user,
-                        userImage=userImage
+
                     )
                 }
 
