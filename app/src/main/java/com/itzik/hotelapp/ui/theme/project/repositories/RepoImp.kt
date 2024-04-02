@@ -58,7 +58,5 @@ class RepoImp @Inject constructor(
         currency
     )
 
-
     override suspend fun updateProfileImage(user: User) = userDao.updateProfileImage(user)
-
 }

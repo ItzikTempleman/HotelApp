@@ -16,6 +16,7 @@ class UserViewModel @Inject constructor(
 ) : ViewModel() {
 
 
+
     fun createUser(
         name: String,
         email: String,
@@ -31,7 +32,7 @@ class UserViewModel @Inject constructor(
             isLoggedIn = true,
             isItemLiked = false,
             phoneNumber = phoneNumber,
-            profileImage = profileImage //savedHotels = mutableListOf()
+            profileImage = profileImage
         )
     }
 
@@ -59,23 +60,6 @@ class UserViewModel @Inject constructor(
     suspend fun updateIsLoggedIn(user: User) = repo.updateIsLoggedIn(user)
 
 
-
-    suspend fun updateProfileImage(uri: String) {
-        val user = repo.fetchLoggedInUsers().firstOrNull()
-        user?.let {
-            val updatedUser:User = it.copy(profileImage = uri)
-            repo.updateProfileImage(updatedUser)
-        }
-    }
-
-    suspend fun fetchProfileImage(): Flow<String?> {
-        val fetchedProfileImage = flow {
-            val userProfileImage = repo.fetchLoggedInUsers().firstOrNull()?.profileImage
-            emit(userProfileImage)
-        }
-        return fetchedProfileImage
-    }
-
     fun isValidEmail(email: String): Boolean =
         email.matches(Constants.emailRegex)
 
@@ -84,4 +68,12 @@ class UserViewModel @Inject constructor(
         password.matches(Constants.passwordRegex)
 
 
+
+    suspend fun updateProfileImage(profileImageString: String) {
+        val user = repo.fetchLoggedInUsers().firstOrNull()
+        user?.let {
+            val updatedUser: User = it.copy(profileImage = profileImageString)
+            repo.updateProfileImage(updatedUser)
+        }
+    }
 }

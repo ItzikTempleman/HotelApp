@@ -23,8 +23,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PowerSettingsNew
 import androidx.compose.material.icons.outlined.Call
-import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -60,7 +60,8 @@ fun ProfileScreen(
     coroutineScope: CoroutineScope,
     navController: NavHostController,
     userViewModel: UserViewModel,
-    user: User
+    user: User,
+    userImage:String
 ) {
 
     var isEditClick by remember {
@@ -69,41 +70,33 @@ fun ProfileScreen(
     var isDoneButtonVisible by remember {
         mutableStateOf(false)
     }
+
     var selectedImageUri by remember {
-        mutableStateOf(user.profileImage)
+        mutableStateOf(userImage)
     }
 
-    coroutineScope.launch {
-        if (!selectedImageUri.isNullOrEmpty()) {
-            userViewModel.fetchProfileImage().collect {
-                selectedImageUri = it
-            }
-        }
-    }
 
     val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { uri ->
             coroutineScope.launch {
-                if (uri != null && selectedImageUri != uri.toString()) {
-                    selectedImageUri = uri.toString()
-                    userViewModel.updateProfileImage(selectedImageUri!!)
+                selectedImageUri = uri.toString()
+                userViewModel.updateProfileImage(selectedImageUri)
+                userViewModel.fetchLoggedInUsers().collect {
+                    selectedImageUri = it.first().profileImage
                 }
             }
+            isDoneButtonVisible = true
         }
     )
-
-    Log.d("TAG", "selectedImageUri: $selectedImageUri")
-
 
     ConstraintLayout(
         modifier = modifier.fillMaxSize(),
     ) {
         val (imageContainer, name, editIcon, uploadImageButton, done, email, phone, signOut) = createRefs()
-
-
+        Log.d("TAG", "selectedImageUri: $selectedImageUri")
         Image(
-            painter = if (!selectedImageUri.isNullOrEmpty()) rememberAsyncImagePainter(model = selectedImageUri) else painterResource(
+            painter = if (selectedImageUri.isNotEmpty()) rememberAsyncImagePainter(model = selectedImageUri) else painterResource(
                 id = R.drawable.baseline_person_24
             ),
             contentDescription = null,
@@ -135,16 +128,15 @@ fun ProfileScreen(
 
         IconButton(
             modifier = Modifier.constrainAs(editIcon) {
-                top.linkTo(imageContainer.top)
-                bottom.linkTo(imageContainer.bottom)
-                end.linkTo(parent.end)
+                top.linkTo(name.bottom)
+                start.linkTo(name.start)
             },
             onClick = {
                 isEditClick = true
             }
         ) {
             Icon(
-                imageVector = Icons.Outlined.Edit, contentDescription = null, tint = colorResource(
+                imageVector = Icons.Rounded.Edit, contentDescription = null, tint = colorResource(
                     id = R.color.dark_blue
                 )
             )
@@ -156,12 +148,11 @@ fun ProfileScreen(
                     singlePhotoPickerLauncher.launch(
                         PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
                     )
-                    isDoneButtonVisible = true
                 },
                 modifier = Modifier
                     .constrainAs(uploadImageButton) {
                         top.linkTo(name.bottom)
-                        start.linkTo(imageContainer.end)
+                        start.linkTo(editIcon.end)
                     }
                     .padding(start = 16.dp),
             ) {
@@ -175,6 +166,9 @@ fun ProfileScreen(
         if (isDoneButtonVisible) {
             TextButton(
                 onClick = {
+                    coroutineScope.launch {
+                        userViewModel.updateProfileImage(selectedImageUri!!)
+                    }
                     isDoneButtonVisible = false
                     isEditClick = false
                 },

@@ -32,7 +32,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "CoroutineCreationDuringComposition")
 @Composable
 fun BottomBarNavHost(
     newNavController: NavHostController = rememberNavController(),
@@ -44,7 +44,20 @@ fun BottomBarNavHost(
     var userList by remember {
         mutableStateOf(listOf<User>())
     }
-    var user = User(userName = "", email = "", password = "", isItemLiked = false, phoneNumber=0)
+    var userImage by remember {
+        mutableStateOf("")
+    }
+    var user = User(userName = "", email = "", password = "", isItemLiked = false, phoneNumber = 0)
+
+
+    coroutineScope.launch {
+        userViewModel.fetchLoggedInUsers().collect {
+            if (userList.isNotEmpty()) {
+                val firstUser = userList.first()
+                userImage = firstUser.profileImage
+            }
+        }
+    }
 
     LaunchedEffect(key1 = true) {
         coroutineScope.launch {
@@ -77,11 +90,12 @@ fun BottomBarNavHost(
             ) {
 
                 composable(route = ScreenContainer.Home.route) {
-                    val propertyList = newNavController.previousBackStackEntry?.savedStateHandle?.get<PropertyInfoResponse>(
+                    val propertyList =
+                        newNavController.previousBackStackEntry?.savedStateHandle?.get<PropertyInfoResponse>(
                             "propertyList"
                         )
                     HomeScreen(
-                        propertyList=propertyList,
+                        propertyList = propertyList,
                         modifier = Modifier,
                         userViewModel = userViewModel,
                         propertyViewModel = propertyViewModel,
@@ -111,12 +125,14 @@ fun BottomBarNavHost(
                 }
 
                 composable(route = ScreenContainer.Profile.route) {
+
                     ProfileScreen(
                         modifier = Modifier,
                         navController = paramNavController,
                         userViewModel = userViewModel,
                         coroutineScope = coroutineScope,
-                        user = user
+                        user = user,
+                        userImage=userImage
                     )
                 }
 

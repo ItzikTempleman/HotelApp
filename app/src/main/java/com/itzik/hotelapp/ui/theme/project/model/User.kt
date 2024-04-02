@@ -17,5 +17,5 @@ data class User(
     var isLoggedIn: Boolean = false,
     var isItemLiked: Boolean,
     var phoneNumber: Long,
-    var profileImage: String? = null
+    var profileImage: String=""
 ) : Parcelable
