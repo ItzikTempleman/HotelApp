@@ -88,7 +88,7 @@ fun RowScope.AddItem(
         it.route == screen.route
     } == true
 
-    val contentColor = if (selected) colorResource(id = R.color.dark_blue) else Color.Gray
+    val contentColor = if (selected) colorResource(id = R.color.light_turquoise) else Color.Gray
 
     Box(
         modifier = Modifier

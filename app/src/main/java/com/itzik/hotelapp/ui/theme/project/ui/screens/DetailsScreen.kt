@@ -65,6 +65,7 @@ fun DetailsScreen(
     val rating = hotel.rating?.value?.toDouble()?.toInt()
 
 
+
     navController.currentBackStackEntry?.savedStateHandle?.set(
         key = "propertyList",
         value = propertyInfo.infoData.hotels
@@ -81,7 +82,7 @@ fun DetailsScreen(
                 val (image, icon, text) = createRefs()
 
                 Image(
-                    painter = rememberAsyncImagePainter(model = propertyInfo.infoData.hotels.first().images.first()),
+                    painter = rememberAsyncImagePainter(model = hotel.images.first()),
                     contentDescription = null,
                     modifier = Modifier
                         .constrainAs(image) {

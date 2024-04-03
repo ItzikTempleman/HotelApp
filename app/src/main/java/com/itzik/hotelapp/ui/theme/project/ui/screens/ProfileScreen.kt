@@ -130,7 +130,7 @@ fun ProfileScreen(
                     start.linkTo(imageContainer.end)
                 }
                 .padding(start = 16.dp),
-            color = colorResource(id = R.color.dark_blue),
+            color = colorResource(id = R.color.light_turquoise),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold
         )
@@ -146,7 +146,7 @@ fun ProfileScreen(
         ) {
             Icon(
                 imageVector = Icons.Rounded.Edit, contentDescription = null, tint = colorResource(
-                    id = R.color.dark_blue
+                    id = R.color.light_turquoise
                 )
             )
         }
@@ -167,7 +167,7 @@ fun ProfileScreen(
             ) {
                 Text(
                     text = "Select photo",
-                    color = colorResource(id = R.color.dark_blue),
+                    color = colorResource(id = R.color.light_turquoise),
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -208,12 +208,12 @@ fun ProfileScreen(
         ) {
             Icon(
                 imageVector = Icons.Outlined.Email, contentDescription = null, tint = colorResource(
-                    id = R.color.dark_blue
+                    id = R.color.light_turquoise
                 )
             )
             Text(
                 modifier = Modifier.padding(start = 8.dp),
-                color = colorResource(id = R.color.dark_blue),
+                color = colorResource(id = R.color.light_turquoise),
                 text = user.email
             )
         }
@@ -230,12 +230,12 @@ fun ProfileScreen(
         ) {
             Icon(
                 imageVector = Icons.Outlined.Call, contentDescription = null, tint = colorResource(
-                    id = R.color.dark_blue
+                    id = R.color.light_turquoise
                 )
             )
             Text(
                 modifier = Modifier.padding(start = 8.dp),
-                color = colorResource(id = R.color.dark_blue),
+                color = colorResource(id = R.color.light_turquoise),
                 text = user.phoneNumber.toString()
             )
         }

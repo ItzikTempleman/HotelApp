@@ -1,5 +1,7 @@
 package com.itzik.hotelapp.ui.theme.project.ui.semantics
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,6 +17,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 
+
 @Composable
 fun CustomButton(
     text: String,
@@ -22,8 +25,9 @@ fun CustomButton(
     onButtonClick: () -> Unit,
     isEnabled: Boolean,
     fontSize: TextUnit,
-    containerColor:Color,
+    containerColor: Color,
     contentColor: Color,
+    borderColor:Color,
     roundedShape: Dp
 ) {
     Button(
@@ -33,7 +37,7 @@ fun CustomButton(
             containerColor = containerColor,
             contentColor = contentColor
         ),
-        modifier = modifier
+        modifier = modifier.border(BorderStroke(0.7.dp, borderColor), shape = RoundedCornerShape(roundedShape))
             .fillMaxWidth()
             .height(50.dp),
         onClick = {

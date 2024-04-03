@@ -15,13 +15,13 @@
     <color name="gray">#b0acac</color>
     <color name="transparent">#00B0ACAC</color>
 
-    <color name="purple">#483D8B</color>
+    <color name="deep_purple">#483D8B</color>
     <color name="steel_blue">#5d7595</color>
     <color name="navy_blue">#2c3e50</color>
     <color name="light_pink_purple">#dce2f9</color>
     <color name="yellow">#FFE81D</color>
     <color name="light_yellow">#E5C966</color>
-    <color name="dark_blue">#264776</color>
+    <color name="darker_blue">#264776</color>
     <color name="deep_blue">#1E52A2</color>
     <color name="light_blue">#FF6DA0A5</color>
     <color name="light_turquoise">#25DCDC</color>

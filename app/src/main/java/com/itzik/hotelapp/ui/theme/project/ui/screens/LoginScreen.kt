@@ -159,9 +159,10 @@ fun LoginScreen(
             },
             isEnabled = isButtonEnabled,
             fontSize = 20.sp,
-            containerColor = colorResource(id = R.color.dark_blue),
+            containerColor = colorResource(id = R.color.light_turquoise),
             contentColor = Color.White,
-            roundedShape = 8.dp
+            roundedShape = 8.dp,
+            borderColor = colorResource(id = R.color.light_turquoise)
         )
 
         TextButton(
@@ -178,7 +179,7 @@ fun LoginScreen(
         ) {
             Text(
                 text = stringResource(id = R.string.register),
-                color = colorResource(id = R.color.dark_blue),
+                color = colorResource(id = R.color.light_turquoise),
                 fontSize = 23.sp,
                 fontWeight = FontWeight.Bold
             )

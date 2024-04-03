@@ -60,11 +60,11 @@ fun SearchAndDateSelection(
     userViewModel: UserViewModel,
     coroutineScope: CoroutineScope,
     navController: NavHostController,
-    updatedPropertyInfo: (PropertyInfoResponse)-> Unit,
-    countryName:String,
-    cityName:String,
-    pageLimit:Int,
-    updateProgressBarState:(MutableState<Boolean>)->Unit
+    updatedPropertyInfo: (PropertyInfoResponse) -> Unit,
+    countryName: String,
+    cityName: String,
+    pageLimit: Int,
+    updateProgressBarState: (MutableState<Boolean>) -> Unit
 ) {
 
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
@@ -78,7 +78,8 @@ fun SearchAndDateSelection(
             var isCheckInFirstClicked by remember { mutableStateOf(true) }
             var isCheckOutFirstClicked by remember { mutableStateOf(true) }
             var isExpanded by remember { mutableStateOf(false) }
-            val expansionIcon = if (isExpanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
+            val expansionIcon =
+                if (isExpanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
             var checkInParamDate by remember { mutableStateOf("") }
             var checkOutParamDate by remember { mutableStateOf("") }
             var isSearched by remember { mutableStateOf(false) }
@@ -121,7 +122,8 @@ fun SearchAndDateSelection(
                     modifier = Modifier
 
                         .padding(start = 8.dp, top = 8.dp)
-                        .width(360.dp).zIndex(3f),
+                        .width(360.dp)
+                        .zIndex(3f),
                     leadingIcon = Icons.Rounded.Search,
                     trailingIcon = expansionIcon,
                     placeholder = if (isSearchFieldEmpty) stringResource(id = R.string.blank_search) else stringResource(
@@ -154,7 +156,7 @@ fun SearchAndDateSelection(
                     }
                     Text(
                         text = "Regions found nearby",
-                        modifier=Modifier.padding(start = 16.dp)
+                        modifier = Modifier.padding(start = 16.dp)
                     )
                     hotelsList.forEach { hotel ->
 
@@ -183,29 +185,33 @@ fun SearchAndDateSelection(
                     checkInParamDate = checkIn
                     isValidCheckIn = isValidDateRange(checkIn, checkOutParamDate)
                 },
-                checkInErrorMessage = if (isValidCheckIn && isCheckInFirstClicked) "" else stringResource(id = R.string.check_in_error),
+                checkInErrorMessage = if (isValidCheckIn && isCheckInFirstClicked) "" else stringResource(
+                    id = R.string.check_in_error
+                ),
                 updateCheckOutDate = { checkOut ->
                     checkOutParamDate = checkOut
                     isValidCheckOut = isValidDateRange(checkInParamDate, checkOut)
                 },
-                checkOutErrorMessage = if (isValidCheckOut && isCheckOutFirstClicked) "" else stringResource(id = R.string.check_out_error),
+                checkOutErrorMessage = if (isValidCheckOut && isCheckOutFirstClicked) "" else stringResource(
+                    id = R.string.check_out_error
+                ),
                 updateIsCheckInFirstTime = {
-                    isCheckInFirstClicked =it.value
+                    isCheckInFirstClicked = it.value
                 },
                 updateIsCheckOutFirstTime = {
-                    isCheckOutFirstClicked=it.value
+                    isCheckOutFirstClicked = it.value
                 }
             )
-
-            CustomButton(
-                isEnabled = isButtonEnabled,
-                text = stringResource(id = R.string.find_properties_or_hotels),
-                modifier = Modifier.padding(start = 8.dp, end=8.dp, top=16.dp)
+CustomButton(
+    text = "Search",
+    modifier =  Modifier.width(180.dp).padding(16.dp)
                     .constrainAs(searchBtn) {
                         top.linkTo(datePickerSection.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
                     },
-                onButtonClick = {
-                    coroutineScope.launch {
+    onButtonClick = {
+                            coroutineScope.launch {
                         updateProgressBarState(mutableStateOf(true))
                         propertyViewModel.getPropertyInfo(
                             propertyId,
@@ -222,13 +228,14 @@ fun SearchAndDateSelection(
                             isSearched = true
                         }
                     }
-                },
-                fontSize = 20.sp,
-                containerColor = colorResource(id = R.color.dark_blue),
-                contentColor = colorResource(id = R.color.white),
-                roundedShape = 8.dp
-            )
-
+    },
+    borderColor =if(isButtonEnabled) Color.DarkGray else Color.Transparent,
+    isEnabled = isButtonEnabled,
+    fontSize = 16.sp ,
+    containerColor = if(isButtonEnabled) Color.White else colorResource(id = R.color.very_light_gray),
+    contentColor =  if(isButtonEnabled) Color.DarkGray else Color.White,
+    roundedShape = 12.dp
+)
 
 
             if (isSearched) {
@@ -259,7 +266,7 @@ fun SearchAndDateSelection(
                         },
                         text = formatDate(checkInParamDate) + " - " + formatDate(
                             checkOutParamDate
-                        )+",",
+                        ) + ",",
                         fontSize = 14.sp,
                         color = colorResource(id = R.color.dark_gray),
                         fontWeight = FontWeight.Bold

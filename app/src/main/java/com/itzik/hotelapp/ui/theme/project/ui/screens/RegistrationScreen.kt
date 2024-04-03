@@ -249,9 +249,10 @@ fun RegistrationScreen(
             },
             isEnabled = isButtonEnabled,
             fontSize = 20.sp,
-            containerColor = colorResource(id = R.color.dark_blue),
+            containerColor = colorResource(id = R.color.light_turquoise),
             contentColor = colorResource(id = R.color.white),
-            roundedShape = 8.dp
+            roundedShape = 8.dp,
+            borderColor = colorResource(id = R.color.light_turquoise)
         )
     }
 }

@@ -34,7 +34,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
@@ -112,22 +111,22 @@ fun HotelCard(
                         .constrainAs(propertyNameText) {
                             start.linkTo(parent.start)
                             top.linkTo(parent.top)
-                            end.linkTo(likeBtn.start)
+                            end.linkTo(parent.end)
                         }
-                        .padding(start = 160.dp, end = 4.dp, top = 2.dp),
-                    fontSize = 16.sp,
-                    maxLines = 2,
-                    fontWeight = FontWeight.Bold,
-                    color = colorResource(id = R.color.dark_gray),
+                        .padding(4.dp)
                 )
 
                 Icon(
-                    modifier=Modifier.constrainAs(nightIcon){
-                        start.linkTo(parent.start)
-                        bottom.linkTo(parent.bottom)
-                    }.padding(4.dp).rotate(315f),
+                    modifier= Modifier
+                        .size(22.dp)
+                        .constrainAs(nightIcon) {
+                            start.linkTo(parent.start)
+                            bottom.linkTo(parent.bottom)
+                        }
+                        .padding(4.dp)
+                        .rotate(315f),
                     imageVector = Icons.Filled.Nightlight,
-                    tint= colorResource(id = R.color.purple),
+                    tint= colorResource(id = R.color.deep_purple),
                     contentDescription =null
                 )
 
@@ -150,7 +149,7 @@ fun HotelCard(
                             end.linkTo(bookBtn.start)
                             bottom.linkTo(parent.bottom)
                         }
-                        .size(42.dp)
+                        .size(46.dp)
                         .padding(4.dp),
                     imageVector = Icons.Default.Star,
                     tint= colorResource(id = R.color.yellow),
@@ -163,10 +162,10 @@ fun HotelCard(
                             end.linkTo(bookBtn.start)
                             bottom.linkTo(parent.bottom)
                         }
-                        .padding(bottom = 9.dp, end = 16.dp),
+                        .padding(bottom = 10.dp, end = 20.dp),
                     text = hotel.stars.toString(),
-                    color = Color.Black,
-                    fontSize = 16.sp
+                    color = Color.White,
+                    fontSize = 18.sp
                 )
 
                 IconButton(
@@ -181,7 +180,7 @@ fun HotelCard(
                         isPropertyLiked = !isPropertyLiked
                         hotel.isLiked = !hotel.isLiked
                         coroutineScope.launch {
-                            // userViewModel.updateIsLiked(user, hotel)
+
                         }
                     }
                 ) {
@@ -189,7 +188,7 @@ fun HotelCard(
                         painter = if (!isPropertyLiked) painterResource(id = R.drawable.disliked) else painterResource(
                             id = R.drawable.liked
                         ),
-                        tint = Color.Red,
+                        tint = colorResource(id = R.color.yellow),
                         contentDescription = null
                     )
                 }
@@ -204,13 +203,12 @@ fun HotelCard(
                         }
                         .clip(RoundedCornerShape(4.dp))
                         .padding(8.dp),
-                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.dark_blue)),
+                    colors = ButtonDefaults.buttonColors(Color.White),
                     onClick = {
-                        //TODO
+
                     }
                 ) {
                     Text(
-                        color = Color.White,
                         text = stringResource(id = R.string.book),
                         fontSize = 16.sp,
                     )
