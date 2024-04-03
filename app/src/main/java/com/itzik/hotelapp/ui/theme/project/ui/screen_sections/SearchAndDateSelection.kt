@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Text
@@ -21,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -30,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.itzik.hotelapp.R
@@ -96,7 +99,8 @@ fun SearchAndDateSelection(
                     .constrainAs(searchTF) {
                         top.linkTo(parent.top)
                     }
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.Start
             ) {
                 CustomTextField(
                     invokedFunction = {
@@ -116,8 +120,8 @@ fun SearchAndDateSelection(
                     },
                     modifier = Modifier
 
-                        .padding(start = 8.dp, end = 8.dp, top = 4.dp)
-                        .fillMaxWidth(),
+                        .padding(start = 8.dp, top = 8.dp)
+                        .width(360.dp).zIndex(3f),
                     leadingIcon = Icons.Rounded.Search,
                     trailingIcon = expansionIcon,
                     placeholder = if (isSearchFieldEmpty) stringResource(id = R.string.blank_search) else stringResource(

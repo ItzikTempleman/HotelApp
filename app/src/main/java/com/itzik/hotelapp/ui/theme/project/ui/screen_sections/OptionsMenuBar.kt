@@ -30,12 +30,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.itzik.hotelapp.R
-import com.itzik.hotelapp.ui.theme.project.ui.navigation.items
+import com.itzik.hotelapp.ui.theme.project.model.items
 
 @Composable
 fun OptionsMenuBar(
@@ -56,6 +57,8 @@ fun OptionsMenuBar(
     var isLimitSelectorExpanded by remember {
         mutableStateOf(false)
     }
+
+
     val limitExpansionIcon =
         if (isLimitSelectorExpanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
 
@@ -94,13 +97,21 @@ fun OptionsMenuBar(
                     items.forEach {
                         DropdownMenuItem(
                             onClick = {
+                                val previouslySelectedItem = items.find {
+                                    it.isSelected
+                                }
+                                previouslySelectedItem?.isSelected = false
                                 sortOptionsIndexItem = it
                                 isExpanded = false
                                 onSortSelect(sortOptionsIndexItem.title)
+                                it.isSelected = true
                             }
                         ) {
                             Row(modifier = Modifier.fillMaxWidth()) {
-                                Icon(imageVector = it.selectedIcon, contentDescription = null)
+                                Icon(imageVector = it.selectedIcon, contentDescription = null, tint = if(it.isSelected) colorResource(
+                                    id = it.selectedTint) else colorResource(id = it.unselectedTint)
+                                )
+
                                 Text(
                                     modifier=Modifier.padding(start = 4.dp),
                                     text = it.title)
@@ -115,7 +126,7 @@ fun OptionsMenuBar(
                 modifier = Modifier
 
                     .height(30.dp)
-                    .width(70.dp)
+                    .width(100.dp)
                     .border(
                         0.7.dp,
                         Color.Black,

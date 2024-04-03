@@ -25,7 +25,6 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.twotone.Home
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalDrawerSheet
@@ -68,7 +67,7 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "CoroutineCreationDuringComposition")
 @Composable
 fun HomeScreen(
-    propertyList: PropertyInfoResponse?=null,
+    propertyList: PropertyInfoResponse? = null,
     modifier: Modifier,
     propertyViewModel: PropertyViewModel,
     coroutineScope: CoroutineScope,
@@ -84,7 +83,7 @@ fun HomeScreen(
         mutableStateOf(getEmptyMockData())
     }
 
-    if(propertyList!=null) propertyInfo=propertyList
+    if (propertyList != null) propertyInfo = propertyList
     var pageLimit by remember {
         mutableIntStateOf(10)
     }
@@ -165,7 +164,8 @@ fun HomeScreen(
                 Scaffold(
                     topBar = {
                         TopAppBar(
-                            backgroundColor = Color.White,
+                            backgroundColor = Color.Transparent,
+                            elevation = 0.dp,
                             contentColor = Color.Black,
                             navigationIcon = {
                                 IconButton(onClick = {
@@ -180,22 +180,14 @@ fun HomeScreen(
                                 }
                             },
                             title = {
-                                ConstraintLayout(
+                                Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
+                                        .height(40.dp)
+                                        .background(Color.Transparent),
+                                    horizontalArrangement = Arrangement.Start
                                 ) {
-                                    val (icon) = createRefs()
-                                    Icon(
-                                        imageVector = Icons.TwoTone.Home,
-                                        contentDescription = null,
-                                        modifier = Modifier
-                                            .constrainAs(icon) {
-                                                top.linkTo(parent.top)
-                                                bottom.linkTo(parent.bottom)
-                                                end.linkTo(parent.end)
-                                            }
-                                            .size(28.dp)
-                                    )
+
                                 }
                             }
                         )
@@ -203,7 +195,9 @@ fun HomeScreen(
                     content = {
                         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
                             LazyColumn(
-                                modifier = modifier.fillMaxSize().background(Color.White),
+                                modifier = modifier
+                                    .fillMaxSize()
+                                    .background(Color.White),
                                 state = listState
                             ) {
                                 item {
@@ -216,7 +210,7 @@ fun HomeScreen(
                                         SearchAndDateSelection(
                                             modifier = Modifier
                                                 .fillMaxSize()
-                                                .padding(top = 70.dp),
+                                                .padding(top = 8.dp),
                                             propertyViewModel = propertyViewModel,
                                             coroutineScope = coroutineScope,
                                             navController = navController,
@@ -247,10 +241,10 @@ fun HomeScreen(
                                         hotelItem.coordinates.last(),
                                         propertyInfo.infoData.hotels.first().coordinates.first()
                                     ).second
-                                    Log.d("TAGD","list: ${propertyInfo.infoData.hotels}")
+                                    Log.d("TAGD", "list: ${propertyInfo.infoData.hotels}")
                                     HotelCard(
                                         modifier = Modifier
-                                            .padding(top = 20.dp)
+                                            .padding(top = 8.dp)
                                             .clickable {
                                                 navController.navigate(ScreenContainer.Details.route)
                                             }, hotelItem, userViewModel, user, coroutineScope

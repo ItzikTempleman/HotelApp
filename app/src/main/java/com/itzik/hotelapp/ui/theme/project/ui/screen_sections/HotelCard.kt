@@ -16,6 +16,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Nightlight
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -27,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -67,8 +69,6 @@ fun HotelCard(
     ) {
         val image = rememberAsyncImagePainter(model = hotel.images.first())
 
-        //val rating = hotel.rating?.value?.toDouble()?.toInt()
-
         val (imageRef) = createRefs()
 
         Image(
@@ -104,7 +104,7 @@ fun HotelCard(
             ConstraintLayout(
                 modifier = modifier.fillMaxSize()
             ) {
-                val (propertyNameText, priceText, officialStarsIcon, officialStarValue, starRating, ratingText, ratingValue, likeBtn, bookBtn) = createRefs()
+                val (propertyNameText, nightIcon, priceText, officialStarsIcon, officialStarValue, likeBtn, bookBtn) = createRefs()
 
                 Text(
                     text = hotel.name,
@@ -121,23 +121,36 @@ fun HotelCard(
                     color = colorResource(id = R.color.dark_gray),
                 )
 
-                Text(
-                    text = "Price per night: ${hotel.price}",
-                    modifier = Modifier
-                        .constrainAs(priceText) {
-                            start.linkTo(propertyNameText.start)
-                            top.linkTo(propertyNameText.bottom)
-                        }
-                        .padding(start = 160.dp),
-                    fontSize = 12.sp
+                Icon(
+                    modifier=Modifier.constrainAs(nightIcon){
+                        start.linkTo(parent.start)
+                        bottom.linkTo(parent.bottom)
+                    }.padding(4.dp).rotate(315f),
+                    imageVector = Icons.Filled.Nightlight,
+                    tint= colorResource(id = R.color.purple),
+                    contentDescription =null
                 )
+
+                hotel.price?.let {
+                    Text(
+                        text = it,
+                        modifier = Modifier
+                            .constrainAs(priceText) {
+                                start.linkTo(nightIcon.end)
+                                bottom.linkTo(parent.bottom)
+                            }
+                            .padding(4.dp),
+                        fontSize = 12.sp
+                    )
+                }
 
                 Icon(
                     modifier= Modifier
                         .constrainAs(officialStarsIcon) {
                             end.linkTo(bookBtn.start)
                             bottom.linkTo(parent.bottom)
-                        }.size(42.dp)
+                        }
+                        .size(42.dp)
                         .padding(4.dp),
                     imageVector = Icons.Default.Star,
                     tint= colorResource(id = R.color.yellow),
@@ -145,50 +158,16 @@ fun HotelCard(
                 )
 
                 Text(
-                    modifier=Modifier.constrainAs(officialStarValue){
-                        end.linkTo(bookBtn.start)
-                        bottom.linkTo(parent.bottom)
-                    }.padding(bottom = 9.dp, end=16.dp),
+                    modifier= Modifier
+                        .constrainAs(officialStarValue) {
+                            end.linkTo(bookBtn.start)
+                            bottom.linkTo(parent.bottom)
+                        }
+                        .padding(bottom = 9.dp, end = 16.dp),
                     text = hotel.stars.toString(),
                     color = Color.Black,
                     fontSize = 16.sp
                 )
-
-//                hotel.rating?.value?.toDouble()?.let {
-//                    Rating(
-//                        modifier = Modifier
-//                            .constrainAs(starRating) {
-//                                start.linkTo(parent.start)
-//                                bottom.linkTo(parent.bottom)
-//                            }
-//                            .padding(horizontal = 4.dp),
-//                        rating = it
-//                    )
-//                }
-//
-//                Text(
-//                    text = "${rating.toString()}/10",
-//                    modifier = Modifier
-//                        .constrainAs(ratingValue) {
-//                            start.linkTo(starRating.end)
-//                            bottom.linkTo(parent.bottom)
-//                        }
-//                        .padding(start = 2.dp, bottom = 2.dp),
-//                    fontSize = 14.sp,
-//                    color = colorResource(id = R.color.yellow),
-//                    fontWeight = FontWeight.Bold
-//                )
-//
-//                Text(
-//                    text = "(${hotel.rating?.count.toString()} votes)",
-//                    modifier = Modifier
-//                        .constrainAs(ratingText) {
-//                            start.linkTo(ratingValue.end)
-//                            bottom.linkTo(parent.bottom)
-//                        }
-//                        .padding(start = 2.dp, bottom = 2.dp),
-//                    fontSize = 12.sp,
-//                )
 
                 IconButton(
                     modifier = Modifier
