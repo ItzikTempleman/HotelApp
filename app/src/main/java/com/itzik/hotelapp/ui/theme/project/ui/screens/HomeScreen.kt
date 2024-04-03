@@ -180,15 +180,7 @@ fun HomeScreen(
                                 }
                             },
                             title = {
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(40.dp)
-                                        .background(Color.Transparent),
-                                    horizontalArrangement = Arrangement.Start
-                                ) {
 
-                                }
                             }
                         )
                     },
@@ -210,7 +202,7 @@ fun HomeScreen(
                                         SearchAndDateSelection(
                                             modifier = Modifier
                                                 .fillMaxSize()
-                                                .padding(top = 8.dp),
+                                                .padding(top = 40.dp),
                                             propertyViewModel = propertyViewModel,
                                             coroutineScope = coroutineScope,
                                             navController = navController,
