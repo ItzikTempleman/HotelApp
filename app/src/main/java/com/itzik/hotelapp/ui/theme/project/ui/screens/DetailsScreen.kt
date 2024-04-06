@@ -29,12 +29,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.itzik.hotelapp.R
+import com.itzik.hotelapp.ui.theme.project.model.properties.EntityTypeAndName
+import com.itzik.hotelapp.ui.theme.project.model.properties.InfoData
 import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.ScreenContainer
 import com.itzik.hotelapp.ui.theme.project.ui.semantics.Rating
@@ -45,12 +49,23 @@ import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
 
+@Preview
+@Composable
+fun DetailsScreenPreview(){
+   DetailsScreen(
+       navController = rememberNavController() ,
+       propertyInfo = PropertyInfoResponse(InfoData(emptyList(), EntityTypeAndName("",""),"" ))
+   )
+}
+
+
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DetailsScreen(
     navController: NavHostController,
-    propertyViewModel: PropertyViewModel,
-    coroutineScope: CoroutineScope,
+    propertyViewModel: PropertyViewModel?=null,
+    coroutineScope: CoroutineScope?=null,
     propertyInfo: PropertyInfoResponse
 ) {
 
@@ -97,7 +112,8 @@ fun DetailsScreen(
                     onClick = {
                         navController.navigate(ScreenContainer.Home.route)
                     },
-                    modifier = Modifier.padding(top=16.dp)
+                    modifier = Modifier
+                        .padding(top = 16.dp)
                         .constrainAs(icon) {
                             top.linkTo(parent.top)
                             start.linkTo(parent.start)
@@ -139,9 +155,11 @@ fun DetailsScreen(
                         ) {
                             val (imageGrid,starRating, ratingText, ratingValue )=createRefs()
                             LazyVerticalGrid(
-                                modifier = Modifier.constrainAs(imageGrid){
-                                 top.linkTo(parent.top)
-                                }.fillMaxWidth()
+                                modifier = Modifier
+                                    .constrainAs(imageGrid) {
+                                        top.linkTo(parent.top)
+                                    }
+                                    .fillMaxWidth()
                                     .wrapContentHeight(),
                                 columns = GridCells.Fixed(5)
                             ) {
@@ -151,7 +169,9 @@ fun DetailsScreen(
                                         Image(
                                             painter = image,
                                             contentDescription = null,
-                                            modifier = Modifier.aspectRatio(1f).padding(4.dp),
+                                            modifier = Modifier
+                                                .aspectRatio(1f)
+                                                .padding(4.dp),
                                             contentScale = ContentScale.Crop
                                         )
                                     }

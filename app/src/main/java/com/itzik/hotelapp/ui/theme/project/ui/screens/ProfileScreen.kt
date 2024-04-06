@@ -37,7 +37,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -130,7 +129,7 @@ fun ProfileScreen(
                     start.linkTo(imageContainer.end)
                 }
                 .padding(start = 16.dp),
-            color = colorResource(id = R.color.light_turquoise),
+            color = Color.Black,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold
         )
@@ -145,9 +144,7 @@ fun ProfileScreen(
             }
         ) {
             Icon(
-                imageVector = Icons.Rounded.Edit, contentDescription = null, tint = colorResource(
-                    id = R.color.light_turquoise
-                )
+                imageVector = Icons.Rounded.Edit, contentDescription = null, tint = Color.DarkGray
             )
         }
 
@@ -167,7 +164,7 @@ fun ProfileScreen(
             ) {
                 Text(
                     text = "Select photo",
-                    color = colorResource(id = R.color.light_turquoise),
+                    color = Color.DarkGray,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -207,13 +204,11 @@ fun ProfileScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                imageVector = Icons.Outlined.Email, contentDescription = null, tint = colorResource(
-                    id = R.color.light_turquoise
-                )
+                imageVector = Icons.Outlined.Email, contentDescription = null, tint = Color.DarkGray
             )
             Text(
                 modifier = Modifier.padding(start = 8.dp),
-                color = colorResource(id = R.color.light_turquoise),
+                color =Color.DarkGray,
                 text = user.email
             )
         }
@@ -229,13 +224,11 @@ fun ProfileScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                imageVector = Icons.Outlined.Call, contentDescription = null, tint = colorResource(
-                    id = R.color.light_turquoise
-                )
+                imageVector = Icons.Outlined.Call, contentDescription = null, tint = Color.DarkGray
             )
             Text(
                 modifier = Modifier.padding(start = 8.dp),
-                color = colorResource(id = R.color.light_turquoise),
+                color = Color.DarkGray,
                 text = user.phoneNumber.toString()
             )
         }

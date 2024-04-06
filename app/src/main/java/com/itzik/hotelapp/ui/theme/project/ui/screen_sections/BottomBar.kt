@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
@@ -29,7 +28,6 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.itzik.hotelapp.R
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.ScreenContainer
 import com.itzik.hotelapp.ui.theme.project.viewmodels.PropertyViewModel
 
@@ -88,7 +86,7 @@ fun RowScope.AddItem(
         it.route == screen.route
     } == true
 
-    val contentColor = if (selected) colorResource(id = R.color.light_turquoise) else Color.Gray
+    val contentColor = if (selected) Color.Gray else Color.DarkGray
 
     Box(
         modifier = Modifier

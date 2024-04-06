@@ -202,16 +202,18 @@ fun SearchAndDateSelection(
                     isCheckOutFirstClicked = it.value
                 }
             )
-CustomButton(
-    text = "Search",
-    modifier =  Modifier.width(180.dp).padding(16.dp)
+            CustomButton(
+                text = "Search",
+                modifier = Modifier
+                    .width(180.dp)
+                    .padding(16.dp)
                     .constrainAs(searchBtn) {
                         top.linkTo(datePickerSection.bottom)
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
                     },
-    onButtonClick = {
-                            coroutineScope.launch {
+                onButtonClick = {
+                    coroutineScope.launch {
                         updateProgressBarState(mutableStateOf(true))
                         propertyViewModel.getPropertyInfo(
                             propertyId,
@@ -228,14 +230,14 @@ CustomButton(
                             isSearched = true
                         }
                     }
-    },
-    borderColor =if(isButtonEnabled) Color.DarkGray else Color.Transparent,
-    isEnabled = isButtonEnabled,
-    fontSize = 16.sp ,
-    containerColor = if(isButtonEnabled) Color.White else colorResource(id = R.color.very_light_gray),
-    contentColor =  if(isButtonEnabled) Color.DarkGray else Color.White,
-    roundedShape = 12.dp
-)
+                },
+                borderColor = if (isButtonEnabled) Color.DarkGray else Color.Transparent,
+                isEnabled = isButtonEnabled,
+                fontSize = 16.sp,
+                containerColor = if (isButtonEnabled) Color.White else colorResource(id = R.color.very_light_gray),
+                contentColor = if (isButtonEnabled) Color.DarkGray else Color.White,
+                roundedShape = 12.dp
+            )
 
 
             if (isSearched) {
@@ -255,7 +257,7 @@ CustomButton(
                         },
                         text = "Results near $locationName",
                         fontSize = 16.sp,
-                        color = colorResource(id = R.color.dark_gray),
+                        color = Color.DarkGray,
                         fontWeight = FontWeight.Bold
                     )
 
@@ -268,7 +270,7 @@ CustomButton(
                             checkOutParamDate
                         ) + ",",
                         fontSize = 14.sp,
-                        color = colorResource(id = R.color.dark_gray),
+                        color = Color.DarkGray,
                         fontWeight = FontWeight.Bold
                     )
 

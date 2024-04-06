@@ -98,7 +98,7 @@ fun HotelCard(
                 defaultElevation = 8.dp
             ),
             shape = RoundedCornerShape(8.dp),
-            border = BorderStroke(0.5.dp, colorResource(id = R.color.dark_gray))
+            border = BorderStroke(0.5.dp, Color.DarkGray)
         ) {
             ConstraintLayout(
                 modifier = modifier.fillMaxSize()
@@ -188,7 +188,7 @@ fun HotelCard(
                         painter = if (!isPropertyLiked) painterResource(id = R.drawable.disliked) else painterResource(
                             id = R.drawable.liked
                         ),
-                        tint = colorResource(id = R.color.yellow),
+                        tint = Color.Yellow,
                         contentDescription = null
                     )
                 }
