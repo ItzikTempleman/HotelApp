@@ -90,5 +90,5 @@ class PropertyViewModel @Inject constructor(
             emit(PropertyInfoResponse(newHotelList))
         }
     }
-     
+
 }
