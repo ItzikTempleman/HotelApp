@@ -7,6 +7,8 @@ import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
 import com.itzik.hotelapp.ui.theme.project.repositories.IRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -15,6 +17,14 @@ class PropertyViewModel @Inject constructor(
     private val repo: IRepo
 ) : ViewModel() {
 
+    private val _propertyInfo = MutableStateFlow<PropertyInfoResponse?>(null)
+    val propertyInfo: StateFlow<PropertyInfoResponse?>
+        get() = _propertyInfo
+
+
+    fun updatePropertyInfoState(propertyInfoResponse: PropertyInfoResponse) {
+        _propertyInfo.value = propertyInfoResponse
+    }
 
     suspend fun getPropertyIdByQuery(query: String): Flow<PropertyIdResponse> {
 

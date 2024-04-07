@@ -17,10 +17,12 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,7 +42,6 @@ import com.itzik.hotelapp.ui.theme.project.model.properties.Data
 import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
 import com.itzik.hotelapp.ui.theme.project.ui.semantics.CustomButton
 import com.itzik.hotelapp.ui.theme.project.ui.semantics.CustomTextField
-import com.itzik.hotelapp.ui.theme.project.utils.getEmptyMockData
 import com.itzik.hotelapp.ui.theme.project.viewmodels.PropertyViewModel
 import com.itzik.hotelapp.ui.theme.project.viewmodels.UserViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -89,10 +90,19 @@ fun SearchAndDateSelection(
             var propertyId by remember { mutableStateOf("") }
             var names by remember { mutableStateOf(listOf<Data>()) }
             val hotelsList by remember { mutableStateOf(mutableListOf<Data>()) }
-            var propertyInfo by remember { mutableStateOf(getEmptyMockData()) }
+            var propertyInfo by rememberSaveable { mutableStateOf<PropertyInfoResponse?>(null) }
+
             var isSearchFieldEmpty by remember { mutableStateOf(false) }
             fun updateButtonState(searchParam: String) {
                 isButtonEnabled = searchParam.isNotBlank()
+            }
+
+            LaunchedEffect(propertyViewModel.propertyInfo) {
+                propertyViewModel.propertyInfo.collect {
+                    if (it != null) {
+                        propertyInfo = it
+                    }
+                }
             }
 
             Column(
@@ -225,7 +235,8 @@ fun SearchAndDateSelection(
                             "USD"
                         ).collect {
                             propertyInfo = it
-                            updatedPropertyInfo(propertyInfo)
+                            propertyViewModel.updatePropertyInfoState(propertyInfo!!)
+                            updatedPropertyInfo(propertyInfo!!)
                             updateProgressBarState(mutableStateOf(false))
                             isSearched = true
                         }

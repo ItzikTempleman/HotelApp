@@ -74,6 +74,8 @@ fun ProfileScreen(
         mutableStateOf(user.profileImage)
     }
 
+    val emptySateDrawable = R.drawable.baseline_person_24
+
     LaunchedEffect(Unit) {
         if (selectedImageUri.isNotEmpty()) {
             userViewModel.fetchLoggedInUsers().collect {
@@ -101,11 +103,11 @@ fun ProfileScreen(
     ConstraintLayout(
         modifier = modifier.fillMaxSize(),
     ) {
-        val (imageContainer, name, editIcon, uploadImageButton, done, email, phone, signOut) = createRefs()
+        val (imageContainer, name, editIcon, uploadImageButton, removePhotoText, done, email, phone, signOut) = createRefs()
         Log.d("TAG", "selectedImageUri: $selectedImageUri")
         Image(
-            painter = if (selectedImageUri.isNotEmpty()) rememberAsyncImagePainter(model = selectedImageUri) else painterResource(
-                id = R.drawable.baseline_person_24
+            painter = if (selectedImageUri !="") rememberAsyncImagePainter(model = selectedImageUri) else painterResource(
+                id = emptySateDrawable
             ),
             contentDescription = null,
             contentScale = ContentScale.Crop,
@@ -168,12 +170,32 @@ fun ProfileScreen(
                     fontWeight = FontWeight.Bold
                 )
             }
+
+            TextButton(
+                onClick = {
+                    selectedImageUri = ""
+                    isDoneButtonVisible=true
+                },
+                modifier = Modifier
+                    .constrainAs(removePhotoText) {
+                        top.linkTo(uploadImageButton.bottom)
+                        start.linkTo(uploadImageButton.start)
+                    }
+                    .padding(start = 16.dp),
+            ) {
+                Text(
+                    text = "Remove photo",
+                    color = Color.DarkGray,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
+
         if (isDoneButtonVisible) {
             TextButton(
                 onClick = {
                     coroutineScope.launch {
-                        userViewModel.updateProfileImage(selectedImageUri!!)
+                        userViewModel.updateProfileImage(selectedImageUri)
                     }
                     isDoneButtonVisible = false
                     isEditClick = false
@@ -208,7 +230,7 @@ fun ProfileScreen(
             )
             Text(
                 modifier = Modifier.padding(start = 8.dp),
-                color =Color.DarkGray,
+                color = Color.DarkGray,
                 text = user.email
             )
         }

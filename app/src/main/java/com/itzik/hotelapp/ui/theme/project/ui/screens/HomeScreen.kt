@@ -98,6 +98,7 @@ fun HomeScreen(
         val scope = rememberCoroutineScope()
 
         var isProgressBarVisible by remember { mutableStateOf(false) }
+
         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
             ModalNavigationDrawer(
                 drawerContent = {
