@@ -17,7 +17,6 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -97,13 +96,7 @@ fun SearchAndDateSelection(
                 isButtonEnabled = searchParam.isNotBlank()
             }
 
-            LaunchedEffect(propertyViewModel.propertyInfo) {
-                propertyViewModel.propertyInfo.collect {
-                    if (it != null) {
-                        propertyInfo = it
-                    }
-                }
-            }
+
 
             Column(
                 modifier = Modifier
@@ -212,6 +205,7 @@ fun SearchAndDateSelection(
                     isCheckOutFirstClicked = it.value
                 }
             )
+
             CustomButton(
                 text = "Search",
                 modifier = Modifier
@@ -235,7 +229,7 @@ fun SearchAndDateSelection(
                             "USD"
                         ).collect {
                             propertyInfo = it
-                            propertyViewModel.updatePropertyInfoState(propertyInfo!!)
+                            propertyViewModel.updatePropertyList(it)
                             updatedPropertyInfo(propertyInfo!!)
                             updateProgressBarState(mutableStateOf(false))
                             isSearched = true

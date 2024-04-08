@@ -17,15 +17,12 @@ class PropertyViewModel @Inject constructor(
     private val repo: IRepo
 ) : ViewModel() {
 
-    private val _propertyInfo = MutableStateFlow<PropertyInfoResponse?>(null)
-    val propertyInfo: StateFlow<PropertyInfoResponse?>
-        get() = _propertyInfo
+    private val _propertyList = MutableStateFlow<PropertyInfoResponse?>(null)
+    val propertyList: StateFlow<PropertyInfoResponse?> = _propertyList
 
-
-    fun updatePropertyInfoState(propertyInfoResponse: PropertyInfoResponse) {
-        _propertyInfo.value = propertyInfoResponse
+    fun updatePropertyList(propertyInfo: PropertyInfoResponse) {
+        _propertyList.value = propertyInfo
     }
-
     suspend fun getPropertyIdByQuery(query: String): Flow<PropertyIdResponse> {
 
         val idResponseList = flow {

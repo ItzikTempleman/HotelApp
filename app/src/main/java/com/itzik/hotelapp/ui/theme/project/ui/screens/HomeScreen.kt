@@ -33,6 +33,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -90,6 +91,13 @@ fun HomeScreen(
     var sortedLabel by remember {
         mutableStateOf("")
     }
+
+    LaunchedEffect(propertyViewModel.propertyList) {
+        propertyViewModel.propertyList.collect {
+            propertyInfo = it ?: getEmptyMockData()
+        }
+    }
+
 
     Surface(
         modifier = Modifier.fillMaxSize()
