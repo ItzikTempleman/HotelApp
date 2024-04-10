@@ -98,6 +98,12 @@ fun HomeScreen(
         }
     }
 
+    LaunchedEffect(Unit) {
+        propertyViewModel.locationNameState.collect {
+            cityName = it.first ?: ""
+            countryName = it.second ?: ""
+        }
+    }
 
     Surface(
         modifier = Modifier.fillMaxSize()
@@ -110,9 +116,7 @@ fun HomeScreen(
         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
             ModalNavigationDrawer(
                 drawerContent = {
-
                     ModalDrawerSheet {
-
                         ConstraintLayout(
                             modifier = modifier
                                 .fillMaxWidth()

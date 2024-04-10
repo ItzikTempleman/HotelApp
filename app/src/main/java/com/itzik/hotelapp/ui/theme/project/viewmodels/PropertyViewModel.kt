@@ -20,11 +20,18 @@ class PropertyViewModel @Inject constructor(
     private val _propertyList = MutableStateFlow<PropertyInfoResponse?>(null)
     val propertyList: StateFlow<PropertyInfoResponse?> = _propertyList
 
-    fun updatePropertyList(propertyInfo: PropertyInfoResponse) {
-        _propertyList.value = propertyInfo
-    }
-    suspend fun getPropertyIdByQuery(query: String): Flow<PropertyIdResponse> {
 
+    private val _locationNameState = MutableStateFlow<Pair<String?, String?>>(Pair("",""))
+    val locationNameState: StateFlow<Pair<String?, String?>> = _locationNameState
+
+
+    fun updatePropertyList(propertyInfo: PropertyInfoResponse,locationName:Pair<String, String>) {
+        _propertyList.value = propertyInfo
+        _locationNameState.value=locationName
+    }
+
+
+    suspend fun getPropertyIdByQuery(query: String): Flow<PropertyIdResponse> {
         val idResponseList = flow {
             val response = repo.getPropertyIdByQuery(query)
             if (response.isSuccessful) {

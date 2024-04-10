@@ -229,7 +229,7 @@ fun SearchAndDateSelection(
                             "USD"
                         ).collect {
                             propertyInfo = it
-                            propertyViewModel.updatePropertyList(it)
+                            propertyViewModel.updatePropertyList(it,Pair(cityName,countryName))
                             updatedPropertyInfo(propertyInfo!!)
                             updateProgressBarState(mutableStateOf(false))
                             isSearched = true

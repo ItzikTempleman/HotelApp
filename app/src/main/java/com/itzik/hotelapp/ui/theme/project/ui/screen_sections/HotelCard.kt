@@ -188,7 +188,7 @@ fun HotelCard(
                         painter = if (!isPropertyLiked) painterResource(id = R.drawable.disliked) else painterResource(
                             id = R.drawable.liked
                         ),
-                        tint = Color.Yellow,
+                        tint = Color.Red,
                         contentDescription = null
                     )
                 }
