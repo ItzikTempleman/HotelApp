@@ -97,7 +97,6 @@ fun SearchAndDateSelection(
             }
 
 
-
             Column(
                 modifier = Modifier
                     .constrainAs(searchTF) {
@@ -229,7 +228,8 @@ fun SearchAndDateSelection(
                             "USD"
                         ).collect {
                             propertyInfo = it
-                            propertyViewModel.updatePropertyList(it,Pair(cityName,countryName))
+                            propertyViewModel.updatePropertyList(it)
+                            propertyViewModel.updateCityAndCountry(Pair(cityName, countryName))
                             updatedPropertyInfo(propertyInfo!!)
                             updateProgressBarState(mutableStateOf(false))
                             isSearched = true

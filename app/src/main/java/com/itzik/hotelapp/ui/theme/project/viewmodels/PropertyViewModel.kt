@@ -25,11 +25,14 @@ class PropertyViewModel @Inject constructor(
     val locationNameState: StateFlow<Pair<String?, String?>> = _locationNameState
 
 
-    fun updatePropertyList(propertyInfo: PropertyInfoResponse,locationName:Pair<String, String>) {
+    fun updatePropertyList(propertyInfo: PropertyInfoResponse) {
         _propertyList.value = propertyInfo
-        _locationNameState.value=locationName
     }
 
+    fun updateCityAndCountry(locationName: Pair<String, String>) {
+        Log.d("TAG", "Updating city and country: $locationName")
+        _locationNameState.value = locationName
+    }
 
     suspend fun getPropertyIdByQuery(query: String): Flow<PropertyIdResponse> {
         val idResponseList = flow {

@@ -95,14 +95,18 @@ fun HomeScreen(
     LaunchedEffect(propertyViewModel.propertyList) {
         propertyViewModel.propertyList.collect {
             propertyInfo = it ?: getEmptyMockData()
+            Log.d("TAG","propertyInfo: $propertyInfo")
         }
     }
 
     LaunchedEffect(Unit) {
-        propertyViewModel.locationNameState.collect {
-            cityName = it.first ?: ""
-            countryName = it.second ?: ""
-        }
+            propertyViewModel.locationNameState.collect { locationName ->
+                Log.d("TAG", "Location name: $locationName")
+                locationName.let { (city, country) ->
+                    cityName = city ?: ""
+                    countryName = country ?: ""
+                }
+            }
     }
 
     Surface(
