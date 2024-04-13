@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun BottomBarNavHost(
     newNavController: NavHostController = rememberNavController(),
-    paramNavController: NavHostController,
+    paramNavController: NavHostController = rememberNavController(),
     propertyViewModel: PropertyViewModel,
     userViewModel: UserViewModel,
     coroutineScope: CoroutineScope,

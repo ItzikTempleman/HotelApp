@@ -204,8 +204,6 @@ fun DetailsScreen(
                                     .padding(start = 2.dp, bottom = 2.dp),
                                 fontSize = 12.sp,
                             )
-
-
                         }
                     }
                 }

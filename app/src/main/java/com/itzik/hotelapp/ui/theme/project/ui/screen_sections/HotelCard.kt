@@ -161,43 +161,31 @@ fun HotelCard(
                     )
                 }
 
-                if(hotel.stars!=0) {
-                    Icon(
-                        modifier = Modifier
-                            .constrainAs(officialStarsIcon) {
-                                end.linkTo(bookBtn.start)
-                                bottom.linkTo(parent.bottom)
-                            }
-                            .size(46.dp)
-                            .padding(4.dp),
-                        imageVector = Icons.Default.Star,
-                        tint = colorResource(id = R.color.yellow),
-                        contentDescription = null
-                    )
+                Icon(
+                    modifier = Modifier
+                        .constrainAs(officialStarsIcon) {
+                            end.linkTo(officialStarValue.start)
+                            bottom.linkTo(parent.bottom)
+                        }
+                        .size(36.dp)
+                        .padding(4.dp),
+                    imageVector = Icons.Default.Star,
+                    tint = colorResource(id = R.color.yellow),
+                    contentDescription = null
+                )
 
-                    Text(
-                        modifier = Modifier
-                            .constrainAs(officialStarValue) {
-                                end.linkTo(bookBtn.start)
-                                bottom.linkTo(parent.bottom)
-                            }
-                            .padding(bottom = 10.dp, end = 18.dp),
-                        text = hotel.stars.toString(),
-                        color = Color.Black,
-                        fontSize = 18.sp
-                    )
-                }
-                else Text(
+                Text(
                     modifier = Modifier
                         .constrainAs(officialStarValue) {
                             end.linkTo(bookBtn.start)
                             bottom.linkTo(parent.bottom)
                         }
-                        .padding(bottom = 10.dp, end = 18.dp),
-                    text = "No star rating",
+                        .padding(4.dp),
+                    text = if (hotel.stars.toString() != "0") "${hotel.stars}/ 5" else "No star rating",
                     color = Color.Black,
                     fontSize = 18.sp
                 )
+
                 IconButton(
                     modifier = Modifier
                         .constrainAs(likeBtn) {
