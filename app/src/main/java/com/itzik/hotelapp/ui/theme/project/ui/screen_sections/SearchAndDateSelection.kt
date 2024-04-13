@@ -10,8 +10,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.rounded.Search
@@ -64,7 +67,7 @@ fun SearchAndDateSelection(
     countryName: String,
     cityName: String,
     pageLimit: Int,
-    updateProgressBarState: (MutableState<Boolean>) -> Unit
+    updateProgressBarState: (MutableState<Boolean>) -> Unit,
 ) {
 
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
@@ -105,6 +108,16 @@ fun SearchAndDateSelection(
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.Start
             ) {
+                //TODO FIX CANCEL BUTTON LAYOUT
+                if (locationQuery.length > 3) {
+                    IconButton(
+                        modifier= Modifier.padding(top=40.dp),
+                        onClick = {
+                        locationQuery=""
+                    }) {
+                        Icon(imageVector = Icons.Default.Cancel, contentDescription = "")
+                    }
+                }
                 CustomTextField(
                     invokedFunction = {
                         if (locationQuery.isNotBlank()) {
@@ -123,7 +136,7 @@ fun SearchAndDateSelection(
                     },
                     modifier = Modifier
 
-                        .padding( 8.dp)
+                        .padding(8.dp)
                         .fillMaxWidth()
                         .zIndex(3f),
                     leadingIcon = Icons.Rounded.Search,
