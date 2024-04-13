@@ -134,6 +134,7 @@ fun BottomBarNavHost(
                         )
                     if (propertyInfo != null) {
                         DetailsScreen(
+                            paramNavController=paramNavController,
                             navController = newNavController,
                             propertyViewModel = propertyViewModel,
                             coroutineScope = coroutineScope,

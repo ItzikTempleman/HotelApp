@@ -95,18 +95,18 @@ fun HomeScreen(
     LaunchedEffect(propertyViewModel.propertyList) {
         propertyViewModel.propertyList.collect {
             propertyInfo = it ?: getEmptyMockData()
-            Log.d("TAG","propertyInfo: $propertyInfo")
+            Log.d("TAG", "propertyInfo: $propertyInfo")
         }
     }
 
     LaunchedEffect(Unit) {
-            propertyViewModel.locationNameState.collect { locationName ->
-                Log.d("TAG", "Location name: $locationName")
-                locationName.let { (city, country) ->
-                    cityName = city ?: ""
-                    countryName = country ?: ""
-                }
+        propertyViewModel.locationNameState.collect { locationName ->
+            Log.d("TAG", "Location name: $locationName")
+            locationName.let { (city, country) ->
+                cityName = city ?: ""
+                countryName = country ?: ""
             }
+        }
     }
 
     Surface(
@@ -250,6 +250,15 @@ fun HomeScreen(
                                         hotelItem.coordinates.last(),
                                         propertyInfo.infoData.hotels.first().coordinates.first()
                                     ).second
+                                    LaunchedEffect(Unit) {
+                                        propertyViewModel.locationNameState.collect { locationName ->
+                                            Log.d("TAG", "Location name: $locationName")
+                                            locationName.let { (city, country) ->
+                                                cityName = city ?: ""
+                                                countryName = country ?: ""
+                                            }
+                                        }
+                                    }
                                     Log.d("TAGD", "list: ${propertyInfo.infoData.hotels}")
                                     HotelCard(
                                         modifier = Modifier

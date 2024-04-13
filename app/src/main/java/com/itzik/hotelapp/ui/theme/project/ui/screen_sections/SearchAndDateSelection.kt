@@ -123,8 +123,8 @@ fun SearchAndDateSelection(
                     },
                     modifier = Modifier
 
-                        .padding(start = 8.dp, top = 8.dp)
-                        .width(360.dp)
+                        .padding( 8.dp)
+                        .fillMaxWidth()
                         .zIndex(3f),
                     leadingIcon = Icons.Rounded.Search,
                     trailingIcon = expansionIcon,

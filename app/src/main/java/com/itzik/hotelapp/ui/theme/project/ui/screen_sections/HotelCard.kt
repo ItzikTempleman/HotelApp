@@ -5,7 +5,10 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -38,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import coil.compose.rememberAsyncImagePainter
 import com.itzik.hotelapp.R
 import com.itzik.hotelapp.ui.theme.project.model.User
@@ -103,21 +107,35 @@ fun HotelCard(
             ConstraintLayout(
                 modifier = modifier.fillMaxSize()
             ) {
-                val (propertyNameText, nightIcon, priceText, officialStarsIcon, officialStarValue, likeBtn, bookBtn) = createRefs()
+                val (guideline, propertyNameText, nightIcon, priceText, officialStarsIcon, officialStarValue, likeBtn, bookBtn) = createRefs()
 
-                Text(
-                    text = hotel.name,
+                Box(
                     modifier = Modifier
-                        .constrainAs(propertyNameText) {
+                        .constrainAs(guideline) {
                             start.linkTo(parent.start)
-                            top.linkTo(parent.top)
-                            end.linkTo(parent.end)
+                            width = Dimension.fillToConstraints
                         }
-                        .padding(4.dp)
+                        .fillMaxWidth(0.30f)
+                        .width(1.dp)
+                        .fillMaxHeight()
+                        .background(color = Color.Transparent)
                 )
 
+
+                Text(
+                    modifier = Modifier
+                        .constrainAs(propertyNameText) {
+                            start.linkTo(guideline.end)
+                            top.linkTo(parent.top)
+                            end.linkTo(likeBtn.start)
+                        }
+                        .padding(4.dp),
+                    text = hotel.name
+                )
+
+
                 Icon(
-                    modifier= Modifier
+                    modifier = Modifier
                         .size(22.dp)
                         .constrainAs(nightIcon) {
                             start.linkTo(parent.start)
@@ -126,8 +144,8 @@ fun HotelCard(
                         .padding(4.dp)
                         .rotate(315f),
                     imageVector = Icons.Filled.Nightlight,
-                    tint= colorResource(id = R.color.deep_purple),
-                    contentDescription =null
+                    tint = colorResource(id = R.color.deep_purple),
+                    contentDescription = null
                 )
 
                 hotel.price?.let {
@@ -143,31 +161,43 @@ fun HotelCard(
                     )
                 }
 
-                Icon(
-                    modifier= Modifier
-                        .constrainAs(officialStarsIcon) {
-                            end.linkTo(bookBtn.start)
-                            bottom.linkTo(parent.bottom)
-                        }
-                        .size(46.dp)
-                        .padding(4.dp),
-                    imageVector = Icons.Default.Star,
-                    tint= colorResource(id = R.color.yellow),
-                    contentDescription = null
-                )
+                if(hotel.stars!=0) {
+                    Icon(
+                        modifier = Modifier
+                            .constrainAs(officialStarsIcon) {
+                                end.linkTo(bookBtn.start)
+                                bottom.linkTo(parent.bottom)
+                            }
+                            .size(46.dp)
+                            .padding(4.dp),
+                        imageVector = Icons.Default.Star,
+                        tint = colorResource(id = R.color.yellow),
+                        contentDescription = null
+                    )
 
-                Text(
-                    modifier= Modifier
+                    Text(
+                        modifier = Modifier
+                            .constrainAs(officialStarValue) {
+                                end.linkTo(bookBtn.start)
+                                bottom.linkTo(parent.bottom)
+                            }
+                            .padding(bottom = 10.dp, end = 18.dp),
+                        text = hotel.stars.toString(),
+                        color = Color.Black,
+                        fontSize = 18.sp
+                    )
+                }
+                else Text(
+                    modifier = Modifier
                         .constrainAs(officialStarValue) {
                             end.linkTo(bookBtn.start)
                             bottom.linkTo(parent.bottom)
                         }
-                        .padding(bottom = 10.dp, end = 20.dp),
-                    text = hotel.stars.toString(),
-                    color = Color.White,
+                        .padding(bottom = 10.dp, end = 18.dp),
+                    text = "No star rating",
+                    color = Color.Black,
                     fontSize = 18.sp
                 )
-
                 IconButton(
                     modifier = Modifier
                         .constrainAs(likeBtn) {

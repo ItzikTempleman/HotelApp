@@ -1,6 +1,10 @@
 package com.itzik.hotelapp.ui.theme.project.ui.screens
 
 
+//noinspection UsingMaterialAndMaterial3Libraries
+//noinspection UsingMaterialAndMaterial3Libraries
+//noinspection UsingMaterialAndMaterial3Libraries
+//noinspection UsingMaterialAndMaterial3Libraries
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.aspectRatio
@@ -29,16 +33,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.itzik.hotelapp.R
-import com.itzik.hotelapp.ui.theme.project.model.properties.EntityTypeAndName
-import com.itzik.hotelapp.ui.theme.project.model.properties.InfoData
 import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.ScreenContainer
 import com.itzik.hotelapp.ui.theme.project.ui.semantics.Rating
@@ -49,20 +49,11 @@ import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
 
-@Preview
-@Composable
-fun DetailsScreenPreview(){
-   DetailsScreen(
-       navController = rememberNavController() ,
-       propertyInfo = PropertyInfoResponse(InfoData(emptyList(), EntityTypeAndName("",""),"" ))
-   )
-}
-
-
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DetailsScreen(
+    paramNavController:NavHostController,
     navController: NavHostController,
     propertyViewModel: PropertyViewModel?=null,
     coroutineScope: CoroutineScope?=null,
@@ -110,7 +101,7 @@ fun DetailsScreen(
 
                 IconButton(
                     onClick = {
-                        navController.navigate(ScreenContainer.Home.route)
+                        paramNavController.navigate(ScreenContainer.Home.route)
                     },
                     modifier = Modifier
                         .padding(top = 16.dp)
