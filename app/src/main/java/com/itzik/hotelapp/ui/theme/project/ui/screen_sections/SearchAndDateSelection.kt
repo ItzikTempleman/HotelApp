@@ -4,7 +4,9 @@ package com.itzik.hotelapp.ui.theme.project.ui.screen_sections
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -36,7 +38,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.itzik.hotelapp.R
@@ -108,44 +109,49 @@ fun SearchAndDateSelection(
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.Start
             ) {
-                //TODO FIX CANCEL BUTTON LAYOUT
-                if (locationQuery.length > 3) {
-                    IconButton(
-                        modifier= Modifier.padding(top=40.dp),
-                        onClick = {
-                        locationQuery=""
-                    }) {
-                        Icon(imageVector = Icons.Default.Cancel, contentDescription = "")
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    CustomTextField(
+                        invokedFunction = {
+                            if (locationQuery.isNotBlank()) {
+                                isSearchFieldEmpty = false
+                                isExpanded = !isExpanded
+                                updateProgressBarState(mutableStateOf(true))
+                            } else {
+                                isSearchFieldEmpty = true
+                                return@CustomTextField
+                            }
+                        },
+                        value = locationQuery,
+                        thisValueChange = {
+                            locationQuery = it
+                            updateButtonState(locationQuery)
+                        },
+                        modifier = if (locationQuery.length > 4) Modifier
+                            .padding(start=8.dp, top=8.dp, bottom = 8.dp, end=4.dp)
+                            .width(400.dp)
+                        else Modifier.padding(8.dp)
+                            .fillMaxWidth(),
+                        leadingIcon = Icons.Rounded.Search,
+                        trailingIcon = expansionIcon,
+                        placeholder = if (isSearchFieldEmpty) stringResource(id = R.string.blank_search) else stringResource(
+                            id = R.string.search
+                        ),
+                        contentColor = Color.Black
+                    )
+                    if (locationQuery.length > 4) {
+                        IconButton(
+                            modifier = Modifier.padding(start=4.dp, top=8.dp, bottom = 8.dp, end=8.dp),
+                            onClick = {
+                                locationQuery = ""
+                            }) {
+                            Icon(imageVector = Icons.Default.Cancel, contentDescription = "")
+                        }
                     }
                 }
-                CustomTextField(
-                    invokedFunction = {
-                        if (locationQuery.isNotBlank()) {
-                            isSearchFieldEmpty = false
-                            isExpanded = !isExpanded
-                            updateProgressBarState(mutableStateOf(true))
-                        } else {
-                            isSearchFieldEmpty = true
-                            return@CustomTextField
-                        }
-                    },
-                    value = locationQuery,
-                    thisValueChange = {
-                        locationQuery = it
-                        updateButtonState(locationQuery)
-                    },
-                    modifier = Modifier
-
-                        .padding(8.dp)
-                        .fillMaxWidth()
-                        .zIndex(3f),
-                    leadingIcon = Icons.Rounded.Search,
-                    trailingIcon = expansionIcon,
-                    placeholder = if (isSearchFieldEmpty) stringResource(id = R.string.blank_search) else stringResource(
-                        id = R.string.search
-                    ),
-                    contentColor = Color.Black
-                )
 
                 DropdownMenu(
                     modifier = Modifier
