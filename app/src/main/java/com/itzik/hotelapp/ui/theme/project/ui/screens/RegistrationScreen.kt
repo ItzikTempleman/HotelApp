@@ -24,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -88,7 +87,7 @@ fun RegistrationScreen(
                     top.linkTo(parent.top)
                 },
             fontSize = 32.sp,
-            color = colorResource(id = R.color.dark_gray),
+            color = Color.Gray,
             fontWeight = FontWeight.Bold
         )
 
@@ -249,10 +248,10 @@ fun RegistrationScreen(
             },
             isEnabled = isButtonEnabled,
             fontSize = 20.sp,
-            containerColor = colorResource(id = R.color.light_turquoise),
-            contentColor = colorResource(id = R.color.white),
+            containerColor = Color.Gray,
+            contentColor = Color.White,
             roundedShape = 8.dp,
-            borderColor = colorResource(id = R.color.light_turquoise)
+            borderColor = Color.Gray,
         )
     }
 }

@@ -14,9 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
-import com.itzik.hotelapp.R
 import com.itzik.hotelapp.ui.theme.project.model.User
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.Graph.AUTHENTICATION
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.Graph.HOME
@@ -60,7 +59,7 @@ fun SplashScreen(
         verticalArrangement = Arrangement.Center
     ) {
         CircularProgressIndicator(
-            color = colorResource(id = R.color.light_blue)
+            color = Color.Gray
         )
     }
 

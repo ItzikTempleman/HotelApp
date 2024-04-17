@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -44,18 +45,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
-import com.itzik.hotelapp.R
 import com.itzik.hotelapp.ui.theme.project.model.User
 import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.ScreenContainer
 import com.itzik.hotelapp.ui.theme.project.ui.screen_sections.HotelCard
 import com.itzik.hotelapp.ui.theme.project.ui.screen_sections.OptionsMenuBar
 import com.itzik.hotelapp.ui.theme.project.ui.screen_sections.SearchAndDateSelection
+import com.itzik.hotelapp.ui.theme.project.ui.semantics.customShape
 import com.itzik.hotelapp.ui.theme.project.utils.getEmptyMockData
 import com.itzik.hotelapp.ui.theme.project.utils.getLocationName
 import com.itzik.hotelapp.ui.theme.project.viewmodels.PropertyViewModel
@@ -110,7 +110,9 @@ fun HomeScreen(
     }
 
     Surface(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
     ) {
         val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
         val scope = rememberCoroutineScope()
@@ -120,9 +122,14 @@ fun HomeScreen(
         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
             ModalNavigationDrawer(
                 drawerContent = {
-                    ModalDrawerSheet {
+                    ModalDrawerSheet(
+                        modifier = Modifier.height(250.dp).width(280.dp).padding(8.dp),
+                        drawerShape = customShape(),
+                        drawerContainerColor = Color.White
+                    ) {
                         ConstraintLayout(
                             modifier = modifier
+                                .background(Color.White)
                                 .fillMaxWidth()
                                 .padding(start = 20.dp, top = 12.dp),
                         ) {
@@ -150,7 +157,8 @@ fun HomeScreen(
                         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
 
                             Row(
-                                modifier = modifier
+                                modifier = Modifier
+                                    .background(Color.White)
                                     .fillMaxWidth()
                                     .padding(horizontal = 16.dp),
                                 horizontalArrangement = Arrangement.SpaceEvenly
@@ -278,7 +286,7 @@ fun HomeScreen(
                                 if (isProgressBarVisible) {
                                     CircularProgressIndicator(
                                         modifier = Modifier,
-                                        color = colorResource(id = R.color.light_blue)
+                                        color = Color.Gray
                                     )
                                 }
                             }

@@ -16,7 +16,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -159,10 +158,10 @@ fun LoginScreen(
             },
             isEnabled = isButtonEnabled,
             fontSize = 20.sp,
-            containerColor = colorResource(id = R.color.light_turquoise),
+            containerColor = Color.Gray,
             contentColor = Color.White,
             roundedShape = 8.dp,
-            borderColor = colorResource(id = R.color.light_turquoise)
+            borderColor = Color.Gray
         )
 
         TextButton(
@@ -179,7 +178,7 @@ fun LoginScreen(
         ) {
             Text(
                 text = stringResource(id = R.string.register),
-                color = colorResource(id = R.color.light_turquoise),
+                color = Color.Gray,
                 fontSize = 23.sp,
                 fontWeight = FontWeight.Bold
             )
