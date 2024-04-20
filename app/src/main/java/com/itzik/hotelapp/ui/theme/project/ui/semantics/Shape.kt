@@ -15,11 +15,11 @@ fun customShape() = object : Shape {
         density: Density,
     ): Outline {
         val roundRect = RoundRect(
-            8f, 8f, 780f, 800f,
-            CornerRadius(32f),
-            CornerRadius(32f),
-            CornerRadius(32f),
-            CornerRadius(32f)
+            0f, 0f, 1000f, 800f,
+            CornerRadius(0f),
+            CornerRadius(0f),
+            CornerRadius(0f),
+            CornerRadius(0f)
         )
         return Outline.Rounded(roundRect)
 

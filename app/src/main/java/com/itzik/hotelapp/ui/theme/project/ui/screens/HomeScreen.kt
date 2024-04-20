@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -123,7 +122,7 @@ fun HomeScreen(
             ModalNavigationDrawer(
                 drawerContent = {
                     ModalDrawerSheet(
-                        modifier = Modifier.height(250.dp).width(280.dp).padding(8.dp),
+                        //modifier = Modifier.height(1000.dp).width(500.dp).padding(8.dp),
                         drawerShape = customShape(),
                         drawerContainerColor = Color.White
                     ) {
