@@ -111,7 +111,8 @@ fun BottomBarNavHost(
                     SettingsScreen(
                         modifier = Modifier,
                         navController = paramNavController,
-                        coroutineScope = coroutineScope
+                        coroutineScope = coroutineScope,
+                        propertyViewModel = propertyViewModel,
                     )
                 }
 
