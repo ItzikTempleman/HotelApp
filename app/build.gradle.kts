@@ -62,11 +62,11 @@ android {
 dependencies {
 
     //noinspection KaptUsageInsteadOfKsp
-    kapt ("androidx.room:room-compiler:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
     kapt ("com.google.dagger:hilt-compiler:2.50")
-    annotationProcessor ("androidx.room:room-compiler:2.6.1")
-    implementation (platform ("androidx.compose:compose-bom:2024.04.01"))
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
 
+    implementation ( platform("androidx.compose:compose-bom:2024.04.01"))
     implementation ("com.google.android.material:material:1.11.0")
     implementation ("androidx.compose.material:material:1.6.6")
     implementation ("androidx.compose.material:material-icons-core:1.6.6")
@@ -77,15 +77,15 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
     implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1")
     implementation ("com.google.code.gson:gson:2.10.1")
-    implementation ("com.square.retrofit2:converter-gson:2.9.0")
-    implementation ("com.square.retrofit2:retrofit:2.9.0")
-    implementation ("com.square.okhttp3:logging-interceptor:4.2.1")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.2.1")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-saved-state:2.7.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0")
     implementation ("androidx.lifecycle:lifecycle-common-java8:*version*")
     implementation ("androidx.compose.runtime:runtime-livedata:1.6.6")
     implementation ("io.coil-kt:coil-compose:2.5.0")
@@ -96,7 +96,7 @@ dependencies {
     implementation ("io.github.vanpra.compose-material-dialogs:datetime:0.9.0")
     implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
     implementation ("androidx.compose.ui:ui:1.6.6")
-    implementation ("me.one bone:toolbar-compose:2.3.5")
+    implementation ("me.onebone:toolbar-compose:2.3.5")
     implementation ("androidx.activity:activity-compose:1.9.0")
     implementation ("androidx.compose.ui:ui")
     implementation ("androidx.compose.ui:ui-graphics")
@@ -108,11 +108,10 @@ dependencies {
 
 
 
-
-    testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation ("androidx.compose.ui:ui-test-junit4")
-    debugImplementation ("androidx.compose.ui:ui-tooling")
-    debugImplementation ("androidx.compose.ui:ui-test-manifest")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
