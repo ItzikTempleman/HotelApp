@@ -64,9 +64,9 @@ dependencies {
 
     //material
     implementation ("com.google.android.material:material:1.11.0")
-    implementation ("androidx.compose.material:material:1.6.4")
-    implementation ("androidx.compose.material:material-icons-core:1.6.4")
-    implementation ("androidx.compose.material:material-icons-extended:1.6.4")
+    implementation ("androidx.compose.material:material:1.6.6")
+    implementation ("androidx.compose.material:material-icons-core:1.6.6")
+    implementation ("androidx.compose.material:material-icons-extended:1.6.6")
     implementation("androidx.compose.material3:material3")
 
     //navigation
@@ -81,9 +81,9 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.10.1")
 
     //retrofit
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.2.1")
+    implementation ("com.square.retrofit2:converter-gson:2.9.0")
+    implementation ("com.square.retrofit2:retrofit:2.9.0")
+    implementation ("com.square.okhttp3:logging-interceptor:4.2.1")
 
     //view model + life cycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
@@ -93,8 +93,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0")
     implementation ("androidx.lifecycle:lifecycle-common-java8:*version*")
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.4")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.6")
 
     //coil
     implementation ("io.coil-kt:coil-compose:2.5.0")
@@ -107,26 +106,25 @@ dependencies {
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
 
-
     //dagger hilt
     implementation ("com.google.dagger:hilt-android:2.50")
     kapt ("com.google.dagger:hilt-compiler:2.50")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     //date picker
-    implementation("io.github.vanpra.compose-material-dialogs:datetime:0.9.0")
+    implementation("io.github.intra.compose-material-dialogs:datetime:0.9.0")
 
     //compose
     implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
-    implementation ("androidx.compose.ui:ui:1.6.4")
-    implementation ("me.onebone:toolbar-compose:2.3.5")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2024.03.00"))
+    implementation ("androidx.compose.ui:ui:1.6.6")
+    implementation ("me.one bone:toolbar-compose:2.3.5")
+    implementation("androidx.activity:activity-compose:1.9.0")
+    implementation(platform("androidx.compose:compose-bom:2024.04.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation ("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.13.0")
 
     //testing
     testImplementation("junit:junit:4.13.2")
