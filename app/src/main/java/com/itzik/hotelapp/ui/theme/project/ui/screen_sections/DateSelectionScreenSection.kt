@@ -50,6 +50,7 @@ fun DateSelectionScreenSection(
     var isCheckOutFirstTimeClicked by remember {
         mutableStateOf(true)
     }
+
     Row(
         modifier = modifier
             .fillMaxWidth()
