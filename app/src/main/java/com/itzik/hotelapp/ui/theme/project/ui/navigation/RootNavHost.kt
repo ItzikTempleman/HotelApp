@@ -7,11 +7,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.itzik.hotelapp.ui.theme.project.model.properties.PropertyInfoResponse
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.Graph.AUTHENTICATION
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.Graph.HOME
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.Graph.ROOT
-import com.itzik.hotelapp.ui.theme.project.ui.screens.DetailsScreen
 import com.itzik.hotelapp.ui.theme.project.ui.screens.LoginScreen
 import com.itzik.hotelapp.ui.theme.project.ui.screens.RegistrationScreen
 import com.itzik.hotelapp.ui.theme.project.ui.screens.SplashScreen
@@ -28,6 +26,7 @@ fun RootNavHost(
     propertyViewModel: PropertyViewModel,
     userViewModel: UserViewModel,
     coroutineScope: CoroutineScope,
+
 ) {
     NavHost(
         startDestination = ROOT,
@@ -73,6 +72,7 @@ fun RootNavHost(
         ) {
             composable(route = ScreenContainer.Home.route) {
                 BottomBarNavHost(
+
                     paramNavController = navController,
                     userViewModel = userViewModel,
                     propertyViewModel = propertyViewModel,

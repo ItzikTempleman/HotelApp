@@ -73,7 +73,8 @@ fun HomeScreen(
     coroutineScope: CoroutineScope,
     navController: NavHostController,
     userViewModel: UserViewModel,
-    user: User
+    user: User,
+
 ) {
     val toolbarHeight by remember { mutableStateOf(300.dp) }
     val listState = rememberLazyListState()
@@ -203,19 +204,19 @@ fun HomeScreen(
                                     )
                                 }
                             },
-                            title = {
-
-                            }
+                            title = {}
                         )
                     },
                     content = {
                         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+
                             LazyColumn(
                                 modifier = modifier
                                     .fillMaxSize()
                                     .background(Color.White),
                                 state = listState
                             ) {
+
                                 item {
                                     Box(
                                         modifier = Modifier
@@ -224,6 +225,7 @@ fun HomeScreen(
 
                                     ) {
                                         SearchAndDateSelection(
+
                                             modifier = Modifier
                                                 .fillMaxSize()
                                                 .padding(top = 40.dp),

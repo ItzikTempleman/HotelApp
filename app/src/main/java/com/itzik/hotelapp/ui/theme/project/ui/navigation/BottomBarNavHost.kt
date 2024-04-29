@@ -40,6 +40,7 @@ fun BottomBarNavHost(
     propertyViewModel: PropertyViewModel,
     userViewModel: UserViewModel,
     coroutineScope: CoroutineScope,
+
 ) {
     var userList by remember {
         mutableStateOf(listOf<User>())
@@ -86,6 +87,7 @@ fun BottomBarNavHost(
                             "propertyList"
                         )
                     HomeScreen(
+
                         propertyList = propertyList,
                         modifier = Modifier,
                         userViewModel = userViewModel,

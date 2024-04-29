@@ -9,7 +9,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-
 import com.itzik.hotelapp.ui.theme.project.ui.navigation.RootNavHost
 import com.itzik.hotelapp.ui.theme.project.viewmodels.PropertyViewModel
 import com.itzik.hotelapp.ui.theme.project.viewmodels.UserViewModel
@@ -26,6 +25,8 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContent {
             propertyViewModel = viewModel()
             userViewModel = viewModel()
